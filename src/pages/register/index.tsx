@@ -7,7 +7,6 @@ export function RegisterPage() {
   const [isPassword, setIsPassword] = useState(true);
 
   function handlePasswordInputType() {
-    console.log('ativou');
     setIsPassword(!isPassword);
   }
 
