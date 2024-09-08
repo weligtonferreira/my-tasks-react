@@ -34,7 +34,7 @@ export function LoginPage() {
             </h2>
 
             <form
-              action=''
+              onSubmit={(event) => handleLogin(event)}
               className='flex flex-col items-center justify-center gap-3'
             >
               <div className='flex items-center justify-center bg-input-color rounded-lg px-4 py-2 gap-1'>
