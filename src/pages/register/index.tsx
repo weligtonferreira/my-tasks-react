@@ -5,6 +5,7 @@ import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import { MdMail } from 'react-icons/md';
 
 import { api } from '../../services/api';
+import { notifySuccessPopUp } from '../../utils/notify-popups';
 
 export function RegisterPage() {
   const [isPassword, setIsPassword] = useState(true);
@@ -25,6 +26,8 @@ export function RegisterPage() {
     const data = { name, email, password };
 
     await api.post('/users', data);
+
+    notifySuccessPopUp('Cadastro realizado com sucesso!');
 
     navigate('/login');
   }
