@@ -25,7 +25,7 @@ export function RegisterPage() {
           />
         </div>
 
-        <div className='flex flex-col items-center justify-center h-full bg-primary-gray space-y-12'>
+        <div className='flex flex-col items-center justify-center h-full bg-primary-gray px-4 space-y-12'>
           <h1 className='font-quicksand font-semibold text-5xl'>
             My<span className='text-primary-green'>Tasks</span>
           </h1>
