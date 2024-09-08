@@ -12,7 +12,7 @@ export function LoginPage() {
   return (
     <div className='flex items-center justify-center h-screen w-full bg-light'>
       <div className='flex items-center justify-around h-full w-full'>
-        <div className='flex items-center justify-center py-4'>
+        <div className='hidden md:flex items-center justify-center py-4'>
           <img
             src='/complete_task.svg'
             alt='Imagem de tarefas concluídas'
