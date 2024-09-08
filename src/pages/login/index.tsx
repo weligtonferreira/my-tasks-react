@@ -1,14 +1,34 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import { MdMail } from 'react-icons/md';
+
+import { api } from '../../services/api';
+import { useAuth } from '../../hooks/useAuth';
 
 export function LoginPage() {
   const [isPassword, setIsPassword] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
   function handlePasswordInputType() {
     setIsPassword(!isPassword);
+  }
+
+  async function handleLogin(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const userData = { email, password };
+
+    const token = await api
+      .post('/users/login', userData)
+      .then((res) => res.data);
+
+    login(token);
+
+    navigate('/');
   }
 
   return (
