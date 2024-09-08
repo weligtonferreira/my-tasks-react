@@ -4,6 +4,8 @@ import { MdMail } from 'react-icons/md';
 
 export function LoginPage() {
   const [isPassword, setIsPassword] = useState(true);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   function handlePasswordInputType() {
     setIsPassword(!isPassword);
@@ -42,6 +44,7 @@ export function LoginPage() {
                   autoComplete='email'
                   placeholder='Email'
                   aria-label='Input de email'
+                  onChange={(event) => setEmail(event.target.value)}
                   className='bg-transparent outline-none text-gray-500'
                 />
 
@@ -55,6 +58,7 @@ export function LoginPage() {
                   placeholder='Senha'
                   aria-label='Input de senha'
                   onBlur={() => setIsPassword(true)}
+                  onChange={(event) => setPassword(event.target.value)}
                   className='bg-transparent outline-none text-gray-500'
                 />
 
