@@ -39,6 +39,7 @@ export function LoginPage() {
                 <input
                   type='email'
                   name='email'
+                  autoComplete='email'
                   placeholder='Email'
                   aria-label='Input de email'
                   className='bg-transparent outline-none text-gray-500'
