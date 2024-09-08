@@ -94,7 +94,7 @@ export function RegisterPage() {
               </div>
 
               <button
-                type='button'
+                type='submit'
                 className='w-full py-2 rounded-lg font-bold text-white bg-primary-green hover:bg-secundary-green transition-colors'
               >
                 Cadastro
