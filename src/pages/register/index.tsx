@@ -95,7 +95,7 @@ export function RegisterPage() {
 
               <button
                 type='button'
-                className='w-full py-2 rounded-lg font-bold text-white bg-primary-green hover:bg-[#259629] transition-colors'
+                className='w-full py-2 rounded-lg font-bold text-white bg-primary-green hover:bg-secundary-green transition-colors'
               >
                 Cadastro
               </button>
