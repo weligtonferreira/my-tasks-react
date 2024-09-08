@@ -14,7 +14,7 @@ export function RegisterPage() {
   }
 
   return (
-    <div className='flex items-center justify-center h-screen w-full bg-[#fdfdfd]'>
+    <div className='flex items-center justify-center h-screen w-full bg-light'>
       <div className='flex items-center justify-around h-full w-full'>
         <div className='flex items-center justify-center py-4'>
           <img
