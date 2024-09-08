@@ -40,6 +40,7 @@ export function RegisterPage() {
                 <input
                   type='text'
                   name='name'
+                  autoComplete='name'
                   placeholder='Nome completo'
                   aria-label='Input de nome completo'
                   className='bg-transparent outline-none text-gray-500'
