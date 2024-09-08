@@ -5,6 +5,9 @@ import { MdMail } from 'react-icons/md';
 
 export function RegisterPage() {
   const [isPassword, setIsPassword] = useState(true);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   function handlePasswordInputType() {
     setIsPassword(!isPassword);
@@ -43,6 +46,7 @@ export function RegisterPage() {
                   autoComplete='name'
                   placeholder='Nome completo'
                   aria-label='Input de nome completo'
+                  onChange={(event) => setName(event.target.value)}
                   className='bg-transparent outline-none text-gray-500'
                 />
 
@@ -56,6 +60,7 @@ export function RegisterPage() {
                   autoComplete='email'
                   placeholder='Email'
                   aria-label='Input de email'
+                  onChange={(event) => setEmail(event.target.value)}
                   className='bg-transparent outline-none text-gray-500'
                 />
 
@@ -69,6 +74,7 @@ export function RegisterPage() {
                   placeholder='Senha'
                   aria-label='Input de senha'
                   onBlur={() => setIsPassword(true)}
+                  onChange={(event) => setPassword(event.target.value)}
                   className='bg-transparent outline-none text-gray-500'
                 />
 
