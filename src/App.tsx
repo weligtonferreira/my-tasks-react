@@ -1,19 +1,27 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+import { AppProvider } from './contexts';
+import { ProtectedRoute } from './components/ProtectedRoute';
 
 import { LoginPage } from './pages/login';
 import { RegisterPage } from './pages/register';
-
-const router = createBrowserRouter([
-  {
-    path: '/login',
-    element: <LoginPage />,
-  },
-  {
-    path: '/register',
-    element: <RegisterPage />,
-  },
-]);
+import { HomePage } from './pages/home';
 
 export function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <AppProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/login' element={<LoginPage />} />
+            <Route path='/register' element={<RegisterPage />} />
+
+            <Route element={<ProtectedRoute />}>
+              <Route path='/' element={<HomePage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </AppProvider>
+    </>
+  );
 }
