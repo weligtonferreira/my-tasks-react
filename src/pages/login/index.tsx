@@ -5,6 +5,7 @@ import { MdMail } from 'react-icons/md';
 
 import { api } from '../../services/api';
 import { useAuth } from '../../hooks/useAuth';
+import { notifySuccessPopUp } from '../../utils/notify-popups';
 
 export function LoginPage() {
   const [isPassword, setIsPassword] = useState(true);
@@ -27,6 +28,8 @@ export function LoginPage() {
       .then((res) => res.data);
 
     login(token);
+
+    notifySuccessPopUp('Login realizado com sucesso!');
 
     navigate('/');
   }
