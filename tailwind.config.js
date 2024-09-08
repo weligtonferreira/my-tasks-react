@@ -6,6 +6,7 @@ export default {
       colors: {
         'primary-gray': '#fdfdfd',
         'primary-green': '#228C26',
+        'secundary-green': '#259629',
         'input-color': '#EAEAEA',
       },
       fontFamily: {
