@@ -50,6 +50,7 @@ export function RegisterPage() {
               <div className='flex items-center justify-center bg-input-color rounded-lg px-4 py-2 gap-1'>
                 <input
                   type='email'
+                  name='email'
                   placeholder='Email'
                   aria-label='Input de email'
                   className='bg-transparent outline-none text-gray-500'
