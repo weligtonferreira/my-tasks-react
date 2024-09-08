@@ -39,6 +39,7 @@ export function RegisterPage() {
               <div className='flex items-center justify-center bg-input-color rounded-lg px-4 py-2 gap-1'>
                 <input
                   type='text'
+                  name='name'
                   placeholder='Nome completo'
                   aria-label='Input de nome completo'
                   className='bg-transparent outline-none text-gray-500'
