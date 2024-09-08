@@ -63,6 +63,7 @@ export function RegisterPage() {
               <div className='flex items-center justify-center bg-input-color rounded-lg px-4 py-2 gap-1'>
                 <input
                   type={isPassword ? 'password' : 'text'}
+                  name='password'
                   placeholder='Senha'
                   aria-label='Input de senha'
                   onBlur={() => setIsPassword(true)}
