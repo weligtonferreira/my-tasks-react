@@ -2,10 +2,10 @@ import { createContext, useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import Cookies from 'js-cookie';
 
-import { UserProps } from '../../dto/IUserProps';
+import { IAuthUserProps } from '../../dto/IAuthUserProps';
 
 interface AuthContextProps {
-  user: UserProps | null;
+  user: IAuthUserProps | null;
   isLoading: boolean;
   login: (token: string) => void;
   logout: () => void;
@@ -16,7 +16,7 @@ export const AuthContext = createContext<AuthContextProps>(
 );
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<UserProps | null>(null);
+  const [user, setUser] = useState<IAuthUserProps | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   function validateTokenAndLoadUser() {
@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     if (token) {
       try {
-        const { sub, name }: UserProps = jwtDecode(token);
+        const { sub, name }: IAuthUserProps = jwtDecode(token);
 
         setUser({ userId: sub as string, name, token });
       } catch (error) {
@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   function login(token: string) {
-    const { sub, name }: UserProps = jwtDecode(token);
+    const { sub, name }: IAuthUserProps = jwtDecode(token);
 
     Cookies.set('token', token);
 
