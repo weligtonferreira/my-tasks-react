@@ -15,7 +15,7 @@ export function Header({ userName }: HeaderProps) {
         <div className='flex items-center justify-center gap-1'>
           <FaAngleDown size={15} />
 
-          <p className='font-sans font-light text-gray-800 text-sm'>
+          <p className='font-sans font-light text-gray-800 text-sm sm:text-base'>
             {userName}
           </p>
 
