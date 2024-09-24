@@ -6,7 +6,7 @@ interface HeaderProps {
 
 export function Header({ userName }: HeaderProps) {
   return (
-    <header className='flex items-center justify-between px-20 py-6'>
+    <header className='flex items-center justify-between px-6 sm:px-20 py-6'>
       <h1 className='font-quicksand font-semibold text-3xl select-none'>
         My<span className='text-primary-green'>Tasks</span>
       </h1>
