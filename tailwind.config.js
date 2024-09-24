@@ -17,6 +17,9 @@ export default {
         sans: 'Inter',
         quicksand: 'Quicksand',
       },
+      backdropBlur: {
+        xs: '2px',
+      },
     },
   },
   plugins: [],
