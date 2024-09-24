@@ -4,7 +4,7 @@ interface HeaderProps {
   userName: string;
 }
 
-export function Header({ userName }: HeaderProps) {
+export function Header({ userName = 'Usuário' }: HeaderProps) {
   return (
     <header className='flex items-center justify-between px-6 sm:px-20 py-6'>
       <h1 className='font-quicksand font-semibold text-3xl select-none'>
