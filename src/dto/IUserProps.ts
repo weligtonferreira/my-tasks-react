@@ -1,7 +1,9 @@
-import { JwtPayload } from 'jwt-decode';
+import { ITask } from './ITask';
 
-export interface UserProps extends JwtPayload {
-  userId: string;
+export interface IUserProps {
+  id: string;
   name: string;
-  token: string;
+  email: string;
+  tasksCount: number;
+  tasks: ITask[];
 }
