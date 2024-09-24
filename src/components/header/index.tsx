@@ -20,7 +20,7 @@ export function Header({ userName }: HeaderProps) {
           </p>
 
           <div className='flex items-center justify-center p-1 rounded-full'>
-            <FaUser size={20} />
+            <FaUser size={16} />
           </div>
         </div>
       </div>
