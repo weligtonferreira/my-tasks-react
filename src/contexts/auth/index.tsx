@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
+import Cookies from 'js-cookie';
 
 import { UserProps } from '../../dto/IUserProps';
 
@@ -19,7 +20,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   function validateTokenAndLoadUser() {
-    const token = localStorage.getItem('token');
+    const token = Cookies.get('token');
 
     if (token) {
       try {
@@ -29,7 +30,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       } catch (error) {
         console.error('Invalid token', error);
 
-        localStorage.removeItem('token');
+        Cookies.remove('token');
 
         setUser(null);
       }
@@ -41,13 +42,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   function login(token: string) {
     const { sub, name }: UserProps = jwtDecode(token);
 
-    localStorage.setItem('token', token);
+    Cookies.set('token', token);
 
     setUser({ userId: sub as string, name, token });
   }
 
   function logout() {
-    localStorage.removeItem('token');
+    Cookies.remove('token');
     setUser(null);
   }
 
