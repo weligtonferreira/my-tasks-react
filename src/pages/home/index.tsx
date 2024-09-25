@@ -5,10 +5,11 @@ import { Header } from '../../components/header';
 import { TaskCard } from '../../components/task-card';
 import { AddButton } from '../../components/add-button';
 import { CreateTaskModal } from '../../components/create-task-modal';
+import { DetailsTaskModal } from '../../components/details-task-modal';
+import { UpdateTaskModal } from '../../components/update-task-modal';
 
 import { IUserProps } from '../../dto/IUserProps';
 import { useFetchUserData } from '../../hooks/useFetchUserData';
-import { DetailsTaskModal } from '../../components/details-task-modal';
 import { ITask } from '../../dto/ITask';
 
 export function HomePage() {
@@ -16,7 +17,9 @@ export function HomePage() {
 
   const [isCreateTaskModalOpen, setIsCreateTaskModalOpen] = useState(false);
   const [isDetailsTaskModalOpen, setIsDetailsTaskModalOpen] = useState(false);
+  const [isUpdateTaskModalOpen, setIsUpdateTaskModalOpen] = useState(false);
   const [task, setTask] = useState<ITask>();
+  const [taskIndex, setTaskIndex] = useState<number>(0);
 
   function openCreateTaskModal() {
     setIsCreateTaskModalOpen(true);
@@ -34,6 +37,17 @@ export function HomePage() {
 
   function closeDetailsTaskModal() {
     setIsDetailsTaskModalOpen(false);
+  }
+
+  function openUpdateTaskModal(task: ITask, index: number) {
+    setTask(task);
+    setTaskIndex(index);
+
+    setIsUpdateTaskModalOpen(true);
+  }
+
+  function closeUpdateTaskModal() {
+    setIsUpdateTaskModalOpen(false);
   }
 
   return (
@@ -116,6 +130,17 @@ export function HomePage() {
         <DetailsTaskModal
           task={task as ITask}
           closeDetailsTaskModal={closeDetailsTaskModal}
+        />
+      )}
+
+      {isUpdateTaskModalOpen && (
+        <UpdateTaskModal
+          user={user as IUserProps}
+          task={task as ITask}
+          taskIndex={taskIndex}
+          setUser={setUser}
+          isUpdateTaskModalOpen={isUpdateTaskModalOpen}
+          closeUpdateTaskModal={closeUpdateTaskModal}
         />
       )}
     </div>
