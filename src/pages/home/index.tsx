@@ -1,6 +1,7 @@
 import { FiCheckCircle } from 'react-icons/fi';
 
 import { Header } from '../../components/header';
+import { TaskCard } from '../../components/task-card';
 import { AddButton } from '../../components/add-button';
 
 import { useFetchUserData } from '../../hooks/useFetchUserData';
@@ -33,11 +34,13 @@ export function HomePage() {
             </div>
 
             <div className='flex flex-col items-center justify-center w-full gap-3'>
-              {user?.tasks.map((task) => (
-                <div key={task.id} className='relative w-full'>
-                  <h1>{task.title}</h1>
-                  <p>{task.description}</p>
-                </div>
+              {user?.tasks.map((task, index) => (
+                <TaskCard
+                  user={user}
+                  task={task}
+                  index={index}
+                  setUser={setUser}
+                />
               ))}
             </div>
           </div>
