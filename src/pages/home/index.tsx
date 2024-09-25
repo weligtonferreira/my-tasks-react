@@ -1,13 +1,26 @@
+import { useState } from 'react';
 import { FiCheckCircle } from 'react-icons/fi';
 
 import { Header } from '../../components/header';
 import { TaskCard } from '../../components/task-card';
 import { AddButton } from '../../components/add-button';
+import { CreateTaskModal } from '../../components/create-task-modal';
 
+import { IUserProps } from '../../dto/IUserProps';
 import { useFetchUserData } from '../../hooks/useFetchUserData';
 
 export function HomePage() {
   const { user, setUser } = useFetchUserData();
+
+  const [isCreateTaskModalOpen, setIsCreateTaskModalOpen] = useState(false);
+
+  function openCreateTaskModal() {
+    setIsCreateTaskModalOpen(true);
+  }
+
+  function closeCreateTaskModal() {
+    setIsCreateTaskModalOpen(false);
+  }
 
   return (
     <div className='flex flex-col h-full w-full bg-light'>
@@ -30,7 +43,9 @@ export function HomePage() {
                 </p>
               </div>
 
-              <AddButton>Adicionar</AddButton>
+              <AddButton openCreateTaskModal={openCreateTaskModal}>
+                Adicionar
+              </AddButton>
             </div>
 
             <div className='flex flex-col items-center justify-center w-full gap-3'>
@@ -62,11 +77,22 @@ export function HomePage() {
                 </p>
               </div>
 
-              <AddButton>Nova tarefa</AddButton>
+              <AddButton openCreateTaskModal={openCreateTaskModal}>
+                Nova tarefa
+              </AddButton>
             </div>
           </div>
         )}
       </main>
+
+      {isCreateTaskModalOpen && (
+        <CreateTaskModal
+          user={user as IUserProps}
+          isCreateTaskModalOpen={isCreateTaskModalOpen}
+          setUser={setUser}
+          closeCreateTaskModal={closeCreateTaskModal}
+        />
+      )}
     </div>
   );
 }
