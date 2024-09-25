@@ -1,18 +1,21 @@
 import { ITask } from '../../dto/ITask';
 
 interface TaskMenuOptionsProps {
-  index: number;
   task: ITask;
+  index: number;
   isTaskMenuVisible: boolean;
   setIsTaskMenuVisible: (value: boolean) => void;
   openDetailsTaskModal: (task: ITask) => void;
+  openUpdateTaskModal: (task: ITask, index: number) => void;
 }
 
 export function TaskMenuOptions({
   task,
+  index,
   isTaskMenuVisible,
   setIsTaskMenuVisible,
   openDetailsTaskModal,
+  openUpdateTaskModal,
 }: TaskMenuOptionsProps) {
   return (
     <div
@@ -30,7 +33,13 @@ export function TaskMenuOptions({
         >
           <p className='text-xs text-[#636363] pt-1'>Detalhes</p>
         </li>
-        <li className='py-1 px-3 hover:bg-[#e7e7e7] transition-colors'>
+        <li
+          onClick={() => {
+            openUpdateTaskModal(task, index);
+            setIsTaskMenuVisible(false);
+          }}
+          className='py-1 px-3 hover:bg-[#e7e7e7] transition-colors'
+        >
           <p className='text-xs text-[#636363]'>Editar</p>
         </li>
         <li className='py-1 px-3 hover:bg-[#e7e7e7] transition-colors'>
