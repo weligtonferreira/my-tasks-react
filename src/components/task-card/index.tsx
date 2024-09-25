@@ -17,6 +17,7 @@ interface TaskCardProps {
   index: number;
   setUser: (user: IUserProps) => void;
   openDetailsTaskModal: (task: ITask) => void;
+  openUpdateTaskModal: (task: ITask, index: number) => void;
 }
 
 export function TaskCard({
@@ -25,6 +26,7 @@ export function TaskCard({
   index,
   setUser,
   openDetailsTaskModal,
+  openUpdateTaskModal,
 }: TaskCardProps) {
   const [isTaskMenuVisible, setIsTaskMenuVisible] = useState(false);
   const { id, title, description, isCompleted } = task;
@@ -111,6 +113,7 @@ export function TaskCard({
         isTaskMenuVisible={isTaskMenuVisible}
         setIsTaskMenuVisible={setIsTaskMenuVisible}
         openDetailsTaskModal={openDetailsTaskModal}
+        openUpdateTaskModal={openUpdateTaskModal}
       />
     </>
   );
