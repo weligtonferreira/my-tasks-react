@@ -62,7 +62,7 @@ export function HomePage() {
               </AddButton>
             </div>
 
-            <div className='flex flex-col items-center justify-center w-full gap-3'>
+            <div className='relative flex flex-col items-center justify-center w-full gap-3'>
               {user?.tasks.map((task, index) => (
                 <TaskCard
                   user={user}
