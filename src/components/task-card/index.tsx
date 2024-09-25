@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FiCheckCircle } from 'react-icons/fi';
 import { GiCircle } from 'react-icons/gi';
 import { FaAngleDown } from 'react-icons/fa';
@@ -10,10 +10,6 @@ import { useAuth } from '../../hooks/useAuth';
 import { api } from '../../services/api';
 
 import './styles.css';
-import {
-  hideTaskOptionsMenuView,
-  showTaskOptionsMenuView,
-} from '../../utils/task-option-menu-dropdown';
 
 interface TaskCardProps {
   task: ITask;
@@ -52,14 +48,6 @@ export function TaskCard({
 
     setUser(updatedUser);
   }
-
-  useEffect(() => {
-    if (isTaskMenuVisible) {
-      showTaskOptionsMenuView(index);
-    } else {
-      hideTaskOptionsMenuView(index);
-    }
-  }, [isTaskMenuVisible, index]);
 
   return (
     <>
