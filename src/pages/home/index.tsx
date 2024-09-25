@@ -8,11 +8,15 @@ import { CreateTaskModal } from '../../components/create-task-modal';
 
 import { IUserProps } from '../../dto/IUserProps';
 import { useFetchUserData } from '../../hooks/useFetchUserData';
+import { DetailsTaskModal } from '../../components/details-task-modal';
+import { ITask } from '../../dto/ITask';
 
 export function HomePage() {
   const { user, setUser } = useFetchUserData();
 
   const [isCreateTaskModalOpen, setIsCreateTaskModalOpen] = useState(false);
+  const [isDetailsTaskModalOpen, setIsDetailsTaskModalOpen] = useState(false);
+  const [task, setTask] = useState<ITask>();
 
   function openCreateTaskModal() {
     setIsCreateTaskModalOpen(true);
@@ -20,6 +24,16 @@ export function HomePage() {
 
   function closeCreateTaskModal() {
     setIsCreateTaskModalOpen(false);
+  }
+
+  function openDetailsTaskModal(task: ITask) {
+    setTask(task);
+
+    setIsDetailsTaskModalOpen(true);
+  }
+
+  function closeDetailsTaskModal() {
+    setIsDetailsTaskModalOpen(false);
   }
 
   return (
@@ -55,6 +69,7 @@ export function HomePage() {
                   task={task}
                   index={index}
                   setUser={setUser}
+                  openDetailsTaskModal={openDetailsTaskModal}
                 />
               ))}
             </div>
@@ -91,6 +106,13 @@ export function HomePage() {
           isCreateTaskModalOpen={isCreateTaskModalOpen}
           setUser={setUser}
           closeCreateTaskModal={closeCreateTaskModal}
+        />
+      )}
+
+      {isDetailsTaskModalOpen && (
+        <DetailsTaskModal
+          task={task as ITask}
+          closeDetailsTaskModal={closeDetailsTaskModal}
         />
       )}
     </div>
