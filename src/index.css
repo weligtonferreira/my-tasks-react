@@ -21,3 +21,8 @@ body {
 .modal-shadow {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
+
+input:-webkit-autofill {
+  -webkit-text-fill-color: #6b7280 !important;
+  -webkit-box-shadow: 0 0 0 30px #eaeaea inset;
+}
