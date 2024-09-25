@@ -7,10 +7,11 @@ import { AddButton } from '../../components/add-button';
 import { CreateTaskModal } from '../../components/create-task-modal';
 import { DetailsTaskModal } from '../../components/details-task-modal';
 import { UpdateTaskModal } from '../../components/update-task-modal';
+import { DeleteTaskModal } from '../../components/delete-task-modal';
 
+import { ITask } from '../../dto/ITask';
 import { IUserProps } from '../../dto/IUserProps';
 import { useFetchUserData } from '../../hooks/useFetchUserData';
-import { ITask } from '../../dto/ITask';
 
 export function HomePage() {
   const { user, setUser } = useFetchUserData();
@@ -18,6 +19,7 @@ export function HomePage() {
   const [isCreateTaskModalOpen, setIsCreateTaskModalOpen] = useState(false);
   const [isDetailsTaskModalOpen, setIsDetailsTaskModalOpen] = useState(false);
   const [isUpdateTaskModalOpen, setIsUpdateTaskModalOpen] = useState(false);
+  const [isDeleteTaskModalOpen, setIsDeleteTaskModalOpen] = useState(false);
   const [task, setTask] = useState<ITask>();
   const [taskIndex, setTaskIndex] = useState<number>(0);
 
@@ -48,6 +50,17 @@ export function HomePage() {
 
   function closeUpdateTaskModal() {
     setIsUpdateTaskModalOpen(false);
+  }
+
+  function openDeleteTaskModal(task: ITask, index: number) {
+    setTask(task);
+    setTaskIndex(index);
+
+    setIsDeleteTaskModalOpen(true);
+  }
+
+  function closeDeleteTaskModal() {
+    setIsDeleteTaskModalOpen(false);
   }
 
   return (
@@ -86,6 +99,7 @@ export function HomePage() {
                     setUser={setUser}
                     openDetailsTaskModal={openDetailsTaskModal}
                     openUpdateTaskModal={openUpdateTaskModal}
+                    openDeleteTaskModal={openDeleteTaskModal}
                   />
                 </div>
               ))}
@@ -141,6 +155,16 @@ export function HomePage() {
           setUser={setUser}
           isUpdateTaskModalOpen={isUpdateTaskModalOpen}
           closeUpdateTaskModal={closeUpdateTaskModal}
+        />
+      )}
+
+      {isDeleteTaskModalOpen && (
+        <DeleteTaskModal
+          task={task as ITask}
+          index={taskIndex}
+          user={user as IUserProps}
+          setUser={setUser}
+          closeDeleteTaskModal={closeDeleteTaskModal}
         />
       )}
     </div>
