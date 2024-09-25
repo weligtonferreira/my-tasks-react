@@ -7,6 +7,7 @@ interface TaskMenuOptionsProps {
   setIsTaskMenuVisible: (value: boolean) => void;
   openDetailsTaskModal: (task: ITask) => void;
   openUpdateTaskModal: (task: ITask, index: number) => void;
+  openDeleteTaskModal: (task: ITask, index: number) => void;
 }
 
 export function TaskMenuOptions({
@@ -16,6 +17,7 @@ export function TaskMenuOptions({
   setIsTaskMenuVisible,
   openDetailsTaskModal,
   openUpdateTaskModal,
+  openDeleteTaskModal,
 }: TaskMenuOptionsProps) {
   return (
     <div
@@ -42,7 +44,13 @@ export function TaskMenuOptions({
         >
           <p className='text-xs text-[#636363]'>Editar</p>
         </li>
-        <li className='py-1 px-3 hover:bg-[#e7e7e7] transition-colors'>
+        <li
+          onClick={() => {
+            openDeleteTaskModal(task, index);
+            setIsTaskMenuVisible(false);
+          }}
+          className='py-1 px-3 hover:bg-[#e7e7e7] transition-colors'
+        >
           <p className='text-xs text-[#636363] pb-1'>Excluir</p>
         </li>
       </ul>
