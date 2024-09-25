@@ -65,6 +65,7 @@ export function HomePage() {
             <div className='relative flex flex-col items-center justify-center w-full gap-3'>
               {user?.tasks.map((task, index) => (
                 <TaskCard
+                  key={task.id}
                   user={user}
                   task={task}
                   index={index}
