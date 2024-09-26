@@ -90,7 +90,7 @@ export function DeleteTaskModal({
         <div className='w-full flex justify-evenly'>
           <button
             onClick={() => handleDeleteTask()}
-            className='w-full text-white font-bold bg-[#D61010] p-2 hover:brightness-105 transition-colors'
+            className='w-full text-white font-bold bg-[#E50F0F] p-2 hover:brightness-105 transition-colors'
           >
             Excluir
           </button>
