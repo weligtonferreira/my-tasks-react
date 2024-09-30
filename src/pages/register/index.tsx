@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { AxiosError } from 'axios';
 import { FaUser } from 'react-icons/fa';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import { MdMail } from 'react-icons/md';
@@ -35,9 +36,13 @@ export function RegisterPage() {
 
       navigate('/login');
     } catch (error) {
-      notifyErrorPopUp('Erro ao cadastrar usuário!');
-
-      console.error(error);
+      if (error instanceof AxiosError) {
+        if (error.response?.data.statusCode === 409) {
+          notifyErrorPopUp('Usuário já cadastrado!');
+        } else {
+          notifyErrorPopUp('Erro ao cadastrar usuário!');
+        }
+      }
     }
   }
 
