@@ -1,17 +1,24 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { FaUser } from 'react-icons/fa';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import { MdMail } from 'react-icons/md';
+import { z } from 'zod';
 
+import {
+  notifyErrorPopUp,
+  notifySuccessPopUp,
+} from '../../utils/notify-popups';
+import { handleNotifyValidationErrors } from '../../utils/handle-notify-validation-errors';
+import { createUserSchema } from '../../schemas/userSchema';
 import { api } from '../../services/api';
-import { notifySuccessPopUp } from '../../utils/notify-popups';
+
+type CreateUserInputData = z.infer<typeof createUserSchema>;
 
 export function RegisterPage() {
+  const { register, handleSubmit } = useForm<CreateUserInputData>();
   const [isPassword, setIsPassword] = useState(true);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   function handlePasswordInputType() {
@@ -19,17 +26,19 @@ export function RegisterPage() {
   }
 
   async function handleCreateAnAccount(
-    event: React.FormEvent<HTMLFormElement>
+    createUserInputData: CreateUserInputData
   ) {
-    event.preventDefault();
+    try {
+      await api.post('/users', createUserInputData);
 
-    const data = { name, email, password };
+      notifySuccessPopUp('Cadastro realizado com sucesso!');
 
-    await api.post('/users', data);
+      navigate('/login');
+    } catch (error) {
+      notifyErrorPopUp('Erro ao cadastrar usuário!');
 
-    notifySuccessPopUp('Cadastro realizado com sucesso!');
-
-    navigate('/login');
+      console.error(error);
+    }
   }
 
   return (
@@ -55,17 +64,21 @@ export function RegisterPage() {
             </h2>
 
             <form
-              onSubmit={(event) => handleCreateAnAccount(event)}
+              onSubmit={handleSubmit(handleCreateAnAccount, (formErrors) =>
+                handleNotifyValidationErrors(formErrors)
+              )}
               className='flex flex-col items-center justify-center gap-3'
             >
               <div className='flex items-center justify-center bg-input-color rounded-lg px-4 py-2 gap-1'>
                 <input
                   type='text'
-                  name='name'
+                  {...register('name', {
+                    required: 'O campo nome é obrigatório',
+                  })}
                   autoComplete='name'
-                  placeholder='Nome completo'
-                  aria-label='Input de nome completo'
-                  onChange={(event) => setName(event.target.value)}
+                  placeholder='Nome'
+                  maxLength={50}
+                  aria-label='Input de nome'
                   className='bg-transparent outline-none text-gray-500'
                 />
 
@@ -75,11 +88,13 @@ export function RegisterPage() {
               <div className='flex items-center justify-center bg-input-color rounded-lg px-4 py-2 gap-1'>
                 <input
                   type='email'
-                  name='email'
+                  {...register('email', {
+                    required: 'O campo email é obrigatório',
+                  })}
                   autoComplete='email'
                   placeholder='Email'
+                  maxLength={100}
                   aria-label='Input de email'
-                  onChange={(event) => setEmail(event.target.value)}
                   className='bg-transparent outline-none text-gray-500'
                 />
 
@@ -89,11 +104,16 @@ export function RegisterPage() {
               <div className='flex items-center justify-center bg-input-color rounded-lg px-4 py-2 gap-1'>
                 <input
                   type={isPassword ? 'password' : 'text'}
-                  name='password'
+                  {...register('password', {
+                    required: 'O campo senha é obrigatório',
+                    minLength: {
+                      value: 8,
+                      message: 'A senha deve ter ao menos oito caracteres',
+                    },
+                  })}
                   placeholder='Senha'
                   aria-label='Input de senha'
                   onBlur={() => setIsPassword(true)}
-                  onChange={(event) => setPassword(event.target.value)}
                   className='bg-transparent outline-none text-gray-500'
                 />
 
