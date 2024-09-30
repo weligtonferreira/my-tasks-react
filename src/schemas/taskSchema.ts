@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const createTaskSchema = z.object({
-  title: z.string().min(1, 'Título inválido'),
+  title: z.string({ required_error: 'O título é obrigatório' }),
   description: z.string().optional(),
 });
 
