@@ -96,7 +96,7 @@ export function DeleteTaskModal({
           </button>
           <button
             onClick={closeDeleteTaskModal}
-            className='w-full text-black font-bold bg-[#EAEAEA] p-2 hover:brightness-95 transition-colors'
+            className='w-full text-[#2B2B2B] font-bold bg-[#EAEAEA] p-2 hover:brightness-95 transition-colors'
           >
             Cancelar
           </button>
