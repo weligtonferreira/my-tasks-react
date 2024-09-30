@@ -60,6 +60,12 @@ export function UpdateTaskModal({
     }
   }
 
+  function handleCloseModal(event: React.KeyboardEvent<HTMLDivElement>) {
+    if (event.key === 'Escape') {
+      closeUpdateTaskModal();
+    }
+  }
+
   useEffect(() => {
     if (isUpdateTaskModalOpen) {
       document.body.style.overflow = 'hidden';
@@ -85,6 +91,8 @@ export function UpdateTaskModal({
 
   return (
     <div
+      tabIndex={0}
+      onKeyUp={(event) => handleCloseModal(event)}
       className={`w-full h-full absolute z-20 ${bgColor} transition-['background-color'] duration-500 backdrop-blur-xs`}
     >
       <div

@@ -62,6 +62,12 @@ export function CreateTaskModal({
     }
   }
 
+  function handleCloseModal(event: React.KeyboardEvent<HTMLDivElement>) {
+    if (event.key === 'Escape') {
+      closeCreateTaskModal();
+    }
+  }
+
   useEffect(() => {
     if (isCreateTaskModalOpen) {
       document.body.style.overflow = 'hidden';
@@ -87,6 +93,8 @@ export function CreateTaskModal({
 
   return (
     <div
+      tabIndex={0}
+      onKeyUp={(event) => handleCloseModal(event)}
       className={`w-full h-full absolute z-20 ${bgColor} transition-['background-color'] duration-500 backdrop-blur-xs`}
     >
       <div

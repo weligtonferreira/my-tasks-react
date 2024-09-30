@@ -51,6 +51,12 @@ export function DeleteTaskModal({
     }
   }
 
+  function handleCloseModal(event: React.KeyboardEvent<HTMLDivElement>) {
+    if (event.key === 'Escape') {
+      closeDeleteTaskModal();
+    }
+  }
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       setBgColor('bg-black/20');
@@ -64,6 +70,8 @@ export function DeleteTaskModal({
 
   return (
     <div
+      tabIndex={0}
+      onKeyUp={(event) => handleCloseModal(event)}
       className={`w-full h-full absolute z-20 ${bgColor} transition-['background-color'] duration-500 backdrop-blur-xs`}
     >
       <div
