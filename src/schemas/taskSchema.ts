@@ -6,6 +6,6 @@ export const createTaskSchema = z.object({
 });
 
 export const updateTaskSchema = z.object({
-  title: z.string().min(1, 'Título inválido').optional(),
+  title: z.string({ required_error: 'O título é obrigatório' }),
   description: z.string().optional(),
 });
