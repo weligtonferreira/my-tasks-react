@@ -1,16 +1,25 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import { MdMail } from 'react-icons/md';
+import { AxiosError } from 'axios';
+import { z } from 'zod';
 
 import { api } from '../../services/api';
 import { useAuth } from '../../hooks/useAuth';
-import { notifySuccessPopUp } from '../../utils/notify-popups';
+import {
+  notifyErrorPopUp,
+  notifySuccessPopUp,
+} from '../../utils/notify-popups';
+import { userLoginInputSchema } from '../../schemas/userSchema';
+import { handleNotifyValidationErrors } from '../../utils/handle-notify-validation-errors';
+
+type UserLoginInputSchema = z.infer<typeof userLoginInputSchema>;
 
 export function LoginPage() {
+  const { register, handleSubmit } = useForm<UserLoginInputSchema>();
   const [isPassword, setIsPassword] = useState(true);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const { login } = useAuth();
 
@@ -18,20 +27,26 @@ export function LoginPage() {
     setIsPassword(!isPassword);
   }
 
-  async function handleLogin(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  async function handleLogin(userLoginInputSchema: UserLoginInputSchema) {
+    try {
+      const userToken = await api
+        .post('/users/login', userLoginInputSchema)
+        .then((res) => res.data);
 
-    const userData = { email, password };
+      login(userToken);
 
-    const token = await api
-      .post('/users/login', userData)
-      .then((res) => res.data);
+      notifySuccessPopUp('Login realizado com sucesso!');
 
-    login(token);
-
-    notifySuccessPopUp('Login realizado com sucesso!');
-
-    navigate('/');
+      navigate('/');
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        if (error.response?.data.statusCode === 400) {
+          notifyErrorPopUp('Email ou senha inválidos!');
+        } else {
+          notifyErrorPopUp('Erro ao fazer login do usuário!');
+        }
+      }
+    }
   }
 
   return (
@@ -57,17 +72,20 @@ export function LoginPage() {
             </h2>
 
             <form
-              onSubmit={(event) => handleLogin(event)}
+              onSubmit={handleSubmit(handleLogin, (formErrors) => {
+                handleNotifyValidationErrors(formErrors);
+              })}
               className='flex flex-col items-center justify-center gap-3'
             >
               <div className='flex items-center justify-center bg-input-color rounded-lg px-4 py-2 gap-1'>
                 <input
                   type='email'
-                  name='email'
+                  {...register('email', {
+                    required: 'O campo email é obrigatório',
+                  })}
                   autoComplete='email'
                   placeholder='Email'
                   aria-label='Input de email'
-                  onChange={(event) => setEmail(event.target.value)}
                   className='bg-transparent outline-none text-gray-500'
                 />
 
@@ -77,11 +95,16 @@ export function LoginPage() {
               <div className='flex items-center justify-center bg-input-color rounded-lg px-4 py-2 gap-1'>
                 <input
                   type={isPassword ? 'password' : 'text'}
-                  name='password'
+                  {...register('password', {
+                    required: 'O campo senha é obrigatório',
+                    minLength: {
+                      value: 8,
+                      message: 'A senha deve ter ao menos oito caracteres',
+                    },
+                  })}
                   placeholder='Senha'
                   aria-label='Input de senha'
                   onBlur={() => setIsPassword(true)}
-                  onChange={(event) => setPassword(event.target.value)}
                   className='bg-transparent outline-none text-gray-500'
                 />
 
