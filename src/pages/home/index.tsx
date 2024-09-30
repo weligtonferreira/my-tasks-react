@@ -69,7 +69,7 @@ export function HomePage() {
 
       <main className='flex flex-col items-center justify-start h-full w-full p-5'>
         {user?.tasksCount ?? 0 > 0 ? (
-          <div className='flex flex-col items-center justify-center w-full sm:max-w-[70vw] gap-6 p-5'>
+          <div className='flex flex-col items-center justify-center w-full sm:max-w-[70vw] gap-8 p-5'>
             <div className='flex items-center justify-between w-full'>
               <div className='flex items-center gap-1'>
                 <FiCheckCircle
