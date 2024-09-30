@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldErrors, useForm } from 'react-hook-form';
 import { IoMdClose } from 'react-icons/io';
 import { z } from 'zod';
 
@@ -31,7 +31,11 @@ export function UpdateTaskModal({
   setUser,
   closeUpdateTaskModal,
 }: UpdateTaskModalProps) {
-  const { register, watch, handleSubmit } = useForm<UpdateTaskInputData>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<UpdateTaskInputData>({
     defaultValues: { title: task.title, description: task.description },
   });
   const [bgColor, setBgColor] = useState('bg-black/0');
@@ -61,6 +65,12 @@ export function UpdateTaskModal({
       notifyErrorPopUp('Erro ao atualizar tarefa!');
 
       console.error(error);
+    }
+  }
+
+  function handleNotifyValidationErros(formErrors: FieldErrors) {
+    if (Object.keys(formErrors).length > 0) {
+      notifyErrorPopUp('Erro de validação!');
     }
   }
 
@@ -114,7 +124,12 @@ export function UpdateTaskModal({
           />
         </div>
 
-        <form onSubmit={handleSubmit(handleUpdateTask)} className='w-full'>
+        <form
+          onSubmit={handleSubmit(handleUpdateTask, (formErrors) =>
+            handleNotifyValidationErros(formErrors)
+          )}
+          className='w-full'
+        >
           <div className='flex flex-col gap-2 bg-white px-8 pt-8 pb-10'>
             <label htmlFor='title' className='text-[#676767]'>
               Título
@@ -122,11 +137,18 @@ export function UpdateTaskModal({
             <input
               id='title'
               type='text'
-              {...register('title')}
+              {...register('title', {
+                required: 'O título é obrigatório',
+              })}
               maxLength={50}
               placeholder='Escreva o título'
               className='outline-none border rounded-md text-[#707070] p-2 focus:border-gray-300 transition-colors'
             />
+            {errors?.title?.message && (
+              <p className='text-sm font-sans text-red-500'>
+                {errors.title.message}
+              </p>
+            )}
 
             <label htmlFor='description' className='text-[#676767]'>
               Descrição
