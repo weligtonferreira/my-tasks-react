@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FieldErrors, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { IoMdClose } from 'react-icons/io';
 import { z } from 'zod';
 
@@ -8,6 +8,7 @@ import {
   notifyErrorPopUp,
   notifySuccessPopUp,
 } from '../../utils/notify-popups';
+import { handleNotifyValidationErrors } from '../../utils/handle-notify-validation-errors';
 import { IUserProps } from '../../dto/IUserProps';
 import { ITask } from '../../dto/ITask';
 import { api } from '../../services/api';
@@ -68,12 +69,6 @@ export function UpdateTaskModal({
     }
   }
 
-  function handleNotifyValidationErros(formErrors: FieldErrors) {
-    if (Object.keys(formErrors).length > 0) {
-      notifyErrorPopUp('Erro de validação!');
-    }
-  }
-
   function handleCloseModal(event: React.KeyboardEvent<HTMLDivElement>) {
     if (event.key === 'Escape') {
       closeUpdateTaskModal();
@@ -126,7 +121,7 @@ export function UpdateTaskModal({
 
         <form
           onSubmit={handleSubmit(handleUpdateTask, (formErrors) =>
-            handleNotifyValidationErros(formErrors)
+            handleNotifyValidationErrors(formErrors)
           )}
           className='w-full'
         >
