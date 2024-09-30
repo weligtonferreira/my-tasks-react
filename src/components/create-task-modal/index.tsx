@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldErrors, useForm } from 'react-hook-form';
 import { IoMdClose } from 'react-icons/io';
 import { z } from 'zod';
 
@@ -27,7 +27,11 @@ export function CreateTaskModal({
   setUser,
   closeCreateTaskModal,
 }: CreateTaskModalProps) {
-  const { register, handleSubmit } = useForm<CreateTaskInputData>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CreateTaskInputData>();
   const { user: authUser } = useAuth();
 
   const [bgColor, setBgColor] = useState('bg-black/0');
@@ -59,6 +63,12 @@ export function CreateTaskModal({
       console.error(error);
 
       notifyErrorPopUp('Um erro ocorreu!');
+    }
+  }
+
+  function handleNotifyValidationErros(formErrors: FieldErrors) {
+    if (Object.keys(formErrors).length > 0) {
+      notifyErrorPopUp('Há erros de validação no formulário!');
     }
   }
 
@@ -112,7 +122,12 @@ export function CreateTaskModal({
           />
         </div>
 
-        <form onSubmit={handleSubmit(handleCreateTask)} className='w-full'>
+        <form
+          onSubmit={handleSubmit(handleCreateTask, (formErrors) =>
+            handleNotifyValidationErros(formErrors)
+          )}
+          className='w-full'
+        >
           <div className='flex flex-col gap-2 bg-white px-8 pt-8 pb-10'>
             <label htmlFor='title' className='text-[#676767]'>
               Título
@@ -120,11 +135,16 @@ export function CreateTaskModal({
             <input
               id='title'
               type='text'
-              {...register('title')}
+              {...register('title', { required: 'O título é obrigatório' })}
               maxLength={50}
               placeholder='Escreva o título'
               className='outline-none border rounded-md text-[#707070] p-2 focus:border-gray-300 transition-colors'
             />
+            {errors?.title?.message && (
+              <p className='text-sm font-sans text-red-500'>
+                {errors.title.message}
+              </p>
+            )}
 
             <label htmlFor='description' className='text-[#676767]'>
               Descrição
