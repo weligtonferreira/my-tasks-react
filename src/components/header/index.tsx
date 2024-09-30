@@ -1,10 +1,10 @@
 import { FaAngleDown, FaUser } from 'react-icons/fa';
 
-interface HeaderProps {
-  userName: string;
-}
+import { useAuth } from '../../hooks/useAuth';
 
-export function Header({ userName = 'Usuário' }: HeaderProps) {
+export function Header() {
+  const { user, logout } = useAuth();
+
   return (
     <header className='flex items-center justify-between px-6 sm:px-20 py-6'>
       <h1 className='font-quicksand font-semibold text-3xl select-none'>
@@ -16,7 +16,7 @@ export function Header({ userName = 'Usuário' }: HeaderProps) {
           <FaAngleDown size={15} />
 
           <p className='font-sans font-light text-gray-800 text-sm sm:text-base'>
-            {userName}
+            {user?.name}
           </p>
 
           <div className='flex items-center justify-center p-1 rounded-full'>
