@@ -89,7 +89,7 @@ export function DeleteTaskModal({
           />
         </div>
 
-        <div className='flex items-center justify-center bg-white h-full p-10'>
+        <div className='flex items-center justify-center bg-[#FAFAFA] h-full p-10'>
           <p className='text-[#707070] text-center'>
             Tem certeza que deseja excluir essa tarefa?
           </p>
