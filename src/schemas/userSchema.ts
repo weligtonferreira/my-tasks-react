@@ -5,3 +5,8 @@ export const createUserSchema = z.object({
   email: z.string({ required_error: 'O email é obrigatório' }).email(),
   password: z.string({ required_error: 'A senha é obrigatória' }),
 });
+
+export const userLoginInputSchema = z.object({
+  email: z.string({ required_error: 'O email é obrigatório' }).email(),
+  password: z.string({ required_error: 'A senha é obrigatória' }),
+});
