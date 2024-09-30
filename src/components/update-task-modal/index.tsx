@@ -4,7 +4,10 @@ import { IoMdClose } from 'react-icons/io';
 import { z } from 'zod';
 
 import { updateTaskSchema } from '../../schemas/taskSchema';
-import { notifySuccessPopUp } from '../../utils/notify-popups';
+import {
+  notifyErrorPopUp,
+  notifySuccessPopUp,
+} from '../../utils/notify-popups';
 import { IUserProps } from '../../dto/IUserProps';
 import { ITask } from '../../dto/ITask';
 import { api } from '../../services/api';
@@ -55,8 +58,9 @@ export function UpdateTaskModal({
 
       notifySuccessPopUp('Tarefa atualizada com sucesso!');
     } catch (error) {
-      console.log(error);
-      closeUpdateTaskModal();
+      notifyErrorPopUp('Erro ao atualizar tarefa!');
+
+      console.error(error);
     }
   }
 
