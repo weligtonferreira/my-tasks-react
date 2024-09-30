@@ -125,7 +125,6 @@ export function UpdateTaskModal({
               {...register('title')}
               maxLength={50}
               placeholder='Escreva o título'
-              value={watch('title')}
               className='outline-none border rounded-md text-[#707070] p-2 focus:border-gray-300 transition-colors'
             />
 
@@ -137,7 +136,6 @@ export function UpdateTaskModal({
               title='description'
               {...register('description')}
               placeholder='Escreva a descrição'
-              value={watch('description')}
               rows={5}
               className='outline-none border rounded-md text-[#707070] p-2 resize-none focus:border-gray-300 transition-colors'
             />
