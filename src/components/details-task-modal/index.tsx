@@ -28,7 +28,7 @@ export function DetailsTaskModal({
 
   return (
     <div
-      className={`w-full h-full absolute z-20 ${bgColor} transition-['background-color'] duration-500`}
+      className={`w-full h-full absolute z-20 ${bgColor} transition-['background-color'] duration-500 backdrop-blur-xs`}
     >
       <div
         className={`${scaleClass} transition-transform duration-300 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[500px] modal-shadow rounded-xl rounded-b-xl overflow-hidden`}
