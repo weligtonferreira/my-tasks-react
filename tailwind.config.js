@@ -12,6 +12,9 @@ export default {
         'primary-green': '#228C26',
         'secundary-green': '#259629',
         'input-color': '#EAEAEA',
+        'dark-input-color': '#474747',
+        'dark-input-icons-color': '#979797',
+        'dark-input-text': '#ADADAD',
       },
       fontFamily: {
         sans: 'Inter',
