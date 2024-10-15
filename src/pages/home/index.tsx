@@ -12,9 +12,11 @@ import { DeleteTaskModal } from '../../components/delete-task-modal';
 import { ITask } from '../../dto/ITask';
 import { IUserProps } from '../../dto/IUserProps';
 import { useFetchUserData } from '../../hooks/useFetchUserData';
+import { useTheme } from '../../hooks/useTheme';
 
 export function HomePage() {
   const { user, setUser } = useFetchUserData();
+  const { theme } = useTheme();
 
   const [isCreateTaskModalOpen, setIsCreateTaskModalOpen] = useState(false);
   const [isDetailsTaskModalOpen, setIsDetailsTaskModalOpen] = useState(false);
@@ -64,7 +66,11 @@ export function HomePage() {
   }
 
   return (
-    <div className='flex flex-col h-full w-full bg-light'>
+    <div
+      className={`flex flex-col h-full ${
+        theme === 'light' ? 'bg-light' : 'bg-dark'
+      } transition-colors duration-300`}
+    >
       <Header />
 
       <main className='flex flex-col items-center justify-start h-full w-full p-5'>
@@ -75,10 +81,16 @@ export function HomePage() {
                 <FiCheckCircle
                   size={25}
                   strokeWidth={3}
-                  className='font-bold text-[#505050]'
+                  className={`font-bold ${
+                    theme === 'light' ? 'text-[#505050]' : 'text-white'
+                  } transition-colors duration-300`}
                 />
 
-                <p className='font-sans font-semibold text-3xl text-[#505050]'>
+                <p
+                  className={`font-sans font-semibold text-3xl ${
+                    theme === 'light' ? 'text-[#505050]' : 'text-white'
+                  } transition-colors duration-300`}
+                >
                   {user?.tasksCount ?? 0}{' '}
                   {user?.tasksCount === 1 ? 'Tarefa' : 'Tarefas'}
                 </p>
@@ -114,7 +126,11 @@ export function HomePage() {
             />
 
             <div className='flex flex-col items-center justify-center gap-5'>
-              <div className='flex flex-col'>
+              <div
+                className={`flex flex-col ${
+                  theme === 'light' ? '' : 'text-white'
+                } transition-colors duration-300`}
+              >
                 <span className='font-bold text-center text-sm sm:text-base'>
                   Ops... parece que ainda não temos nada ainda
                 </span>
