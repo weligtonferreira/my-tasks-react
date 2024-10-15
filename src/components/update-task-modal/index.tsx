@@ -187,7 +187,11 @@ export function UpdateTaskModal({
           <div className='w-full flex flex-col items-center justify-center gap-2'>
             <button
               type='submit'
-              className={`w-full rounded-md font-semibold py-3 transition-colors duration-200 shadow text-white bg-[#26B22A] hover:bg-[#1ABD1F]`}
+              className={`w-full rounded-md font-semibold py-3 transition-colors duration-200 shadow text-white ${
+                theme === 'light'
+                  ? 'bg-[#1ABD1F] hover:bg-[#26B22A]'
+                  : 'bg-[#26B22A] hover:bg-[#1ABD1F]'
+              }`}
             >
               Salvar
             </button>
@@ -196,7 +200,7 @@ export function UpdateTaskModal({
               onClick={closeUpdateTaskModal}
               className={`w-full rounded-md font-semibold py-3 transition-colors duration-200 ${
                 theme === 'light'
-                  ? 'text-[#757575] bg-[#EAEAEA] hover:bg-[#D3D3D3]'
+                  ? 'text-[#757575] bg-[#E5E5E5] hover:bg-[#D3D3D3] hover:text-[#444]'
                   : 'text-[#EAEAEA] bg-[#646464] hover:bg-[#696969]'
               }`}
             >
