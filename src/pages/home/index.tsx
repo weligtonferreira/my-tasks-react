@@ -67,7 +67,7 @@ export function HomePage() {
 
   return (
     <div
-      className={`flex flex-col h-full ${
+      className={`flex flex-col ${
         theme === 'light' ? 'bg-light' : 'bg-dark'
       } transition-colors duration-300`}
     >
