@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { FiCheckCircle } from 'react-icons/fi';
-import { GiCircle } from 'react-icons/gi';
+import { MdOutlineCircle } from 'react-icons/md';
 import { FaAngleDown } from 'react-icons/fa';
 
 import { TaskMenuOptions } from '../task-menu-options';
 import { ITask } from '../../dto/ITask';
 import { IUserProps } from '../../dto/IUserProps';
 import { useAuth } from '../../hooks/useAuth';
+import { useTheme } from '../../hooks/useTheme';
 import { api } from '../../services/api';
 
 import './styles.css';
@@ -33,6 +34,7 @@ export function TaskCard({
   const [isTaskMenuVisible, setIsTaskMenuVisible] = useState(false);
   const { id, title, description, isCompleted } = task;
   const { user: authUser } = useAuth();
+  const { theme } = useTheme();
 
   async function handleChangeTaskStatus() {
     await api.patch(
@@ -56,9 +58,17 @@ export function TaskCard({
   return (
     <>
       <div
-        className={`flex items-center justify-between w-full p-3 gap-4 rounded-lg card-shadow ${
-          isCompleted ? 'bg-[#f3f3f3] hover:bg-[#f1f1f1]' : 'hover:bg-[#f8f8f8]'
-        }  transition-colors`}
+        className={`flex items-center justify-between w-full p-3 gap-4 rounded-lg ${
+          theme === 'light' ? 'light-task-shadow' : 'dark-task-shadow'
+        } ${
+          isCompleted
+            ? theme === 'light'
+              ? 'bg-[#f3f3f3] hover:bg-[#f1f1f1]'
+              : 'bg-dark-complete-task-color hover:brightness-105'
+            : theme === 'light'
+            ? 'bg-light hover:bg-[#f8f8f8]'
+            : 'bg-dark-task-color hover:brightness-105'
+        } transition-all duration-300`}
       >
         <div className='flex items-center gap-2 overflow-hidden'>
           {isCompleted ? (
@@ -66,21 +76,30 @@ export function TaskCard({
               size={15}
               strokeWidth={3}
               onClick={handleChangeTaskStatus}
-              className='font-bold text-[#505050] cursor-pointer'
+              className={`font-bold ${
+                theme === 'light' ? 'text-[#505050]' : 'text-[#D4D4D4]'
+              } cursor-pointer transition-colors duration-300`}
             />
           ) : (
-            <GiCircle
+            <MdOutlineCircle
               size={15}
-              strokeWidth={5}
               onClick={handleChangeTaskStatus}
-              className='text-[#BCBCBC] cursor-pointer'
+              className={`cursor-pointer ${
+                theme === 'light' ? 'text-[#BCBCBC]' : 'text-white'
+              } transition-colors duration-300`}
             />
           )}
 
           <p
-            className={`font-semibold ${
-              isCompleted ? 'line-through' : ''
-            } text-[#6F6F6F] whitespace-nowrap overflow-hidden overflow-ellipsis`}
+            className={`font-semibold cursor-default ${
+              isCompleted
+                ? theme === 'light'
+                  ? 'line-through text-[#6F6F6F]'
+                  : 'line-through text-[#D4D4D4]'
+                : theme === 'light'
+                ? 'text-[#6F6F6F]'
+                : 'text-white'
+            } whitespace-nowrap overflow-hidden overflow-ellipsis transition-colors duration-300`}
           >
             {title}
           </p>
@@ -88,9 +107,15 @@ export function TaskCard({
 
         <div className='flex justify-end sm:w-full max-w-64 gap-4 overflow-hidden'>
           <p
-            className={`text-xs text-[#6F6F6F] hidden sm:block ${
-              isCompleted ? 'line-through' : ''
-            } whitespace-nowrap overflow-hidden overflow-ellipsis`}
+            className={`text-xs hidden sm:block cursor-default ${
+              isCompleted
+                ? theme === 'light'
+                  ? 'line-through text-[#6F6F6F]'
+                  : 'line-through text-[#D4D4D4]'
+                : theme === 'light'
+                ? 'text-[#6F6F6F]'
+                : 'text-[#EAEAEA]'
+            } whitespace-nowrap overflow-hidden overflow-ellipsis transition-colors duration-300`}
           >
             {description}
           </p>
@@ -102,9 +127,11 @@ export function TaskCard({
                 : setIsTaskMenuVisible(false)
             }
             size={16}
-            className={`${
-              isTaskMenuVisible ? 'rotate-180 ' : ''
-            } shrink-0 text-[#6F6F6F] hover:text-[#363636] transition-all duration-200 cursor-pointer`}
+            className={`${isTaskMenuVisible ? 'rotate-180 ' : ''} shrink-0 ${
+              theme === 'light'
+                ? 'text-[#6F6F6F] hover:text-[#363636]'
+                : 'text-[#A2A2A2] hover:text-[#888888]'
+            } transition-all duration-200 cursor-pointer`}
           />
         </div>
       </div>

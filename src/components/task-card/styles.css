@@ -1,3 +1,7 @@
-.card-shadow {
-  box-shadow: 0 0 3px rgba(128, 128, 128, 0.39);
+.light-task-shadow {
+  box-shadow: 0 0 2px rgba(128, 128, 128, 0.39);
+}
+
+.dark-task-shadow {
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
