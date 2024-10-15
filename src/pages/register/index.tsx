@@ -14,6 +14,7 @@ import {
 import { handleNotifyValidationErrors } from '../../utils/handle-notify-validation-errors';
 import { createUserSchema } from '../../schemas/userSchema';
 import { api } from '../../services/api';
+import { useTheme } from '../../hooks/useTheme';
 
 type CreateUserInputData = z.infer<typeof createUserSchema>;
 
@@ -21,6 +22,7 @@ export function RegisterPage() {
   const { register, handleSubmit } = useForm<CreateUserInputData>();
   const [isPassword, setIsPassword] = useState(true);
   const navigate = useNavigate();
+  const { theme } = useTheme();
 
   function handlePasswordInputType() {
     setIsPassword(!isPassword);
@@ -47,7 +49,11 @@ export function RegisterPage() {
   }
 
   return (
-    <div className='flex items-center justify-center h-screen w-full bg-light'>
+    <div
+      className={`flex items-center justify-center h-screen w-full ${
+        theme === 'light' ? 'bg-light' : 'bg-dark'
+      } transition-colors duration-300`}
+    >
       <div className='flex items-center justify-around h-full w-full'>
         <div className='hidden md:flex items-center justify-center py-4'>
           <img
@@ -58,13 +64,25 @@ export function RegisterPage() {
           />
         </div>
 
-        <section className='flex flex-col items-center justify-center h-full bg-primary-gray px-4 space-y-12'>
-          <h1 className='font-quicksand font-semibold text-5xl'>
+        <section
+          className={`flex flex-col items-center justify-center h-full px-4 space-y-12 ${
+            theme === 'light' ? 'bg-light' : 'bg-dark'
+          } transition-colors duration-300`}
+        >
+          <h1
+            className={`font-quicksand font-semibold text-5xl ${
+              theme === 'light' ? '' : 'text-white'
+            } transition-colors duration-300`}
+          >
             My<span className='text-primary-green'>Tasks</span>
           </h1>
 
           <div className='flex flex-col items-center justify-center gap-4'>
-            <h2 className='font-quicksand font-bold text-3xl text-[#8D8D8D]'>
+            <h2
+              className={`font-quicksand font-bold text-3xl ${
+                theme === 'light' ? 'text-[#8D8D8D]' : 'text-white'
+              } transition-colors duration-300`}
+            >
               Cadastro
             </h2>
 
@@ -74,7 +92,11 @@ export function RegisterPage() {
               )}
               className='flex flex-col items-center justify-center gap-3'
             >
-              <div className='flex items-center justify-center bg-input-color rounded-lg px-4 py-2 gap-1'>
+              <div
+                className={`flex items-center justify-center rounded-lg px-4 py-2 gap-1 ${
+                  theme === 'light' ? 'bg-input-color' : 'bg-dark-input-color'
+                } transition-colors duration-300`}
+              >
                 <input
                   type='text'
                   {...register('name', {
@@ -84,13 +106,26 @@ export function RegisterPage() {
                   placeholder='Nome'
                   maxLength={50}
                   aria-label='Input de nome'
-                  className='bg-transparent outline-none text-gray-500'
+                  className={`bg-transparent outline-none ${
+                    theme === 'light' ? 'text-gray-500' : 'text-dark-input-text'
+                  } transition-colors duration-300`}
                 />
 
-                <FaUser size={18} className='text-gray-700' />
+                <FaUser
+                  size={18}
+                  className={`${
+                    theme === 'light'
+                      ? 'text-gray-700'
+                      : 'text-dark-input-icons-color'
+                  } transition-colors duration-300`}
+                />
               </div>
 
-              <div className='flex items-center justify-center bg-input-color rounded-lg px-4 py-2 gap-1'>
+              <div
+                className={`flex items-center justify-center rounded-lg px-4 py-2 gap-1 ${
+                  theme === 'light' ? 'bg-input-color' : 'bg-dark-input-color'
+                } transition-colors duration-300`}
+              >
                 <input
                   type='email'
                   {...register('email', {
@@ -100,13 +135,26 @@ export function RegisterPage() {
                   placeholder='Email'
                   maxLength={100}
                   aria-label='Input de email'
-                  className='bg-transparent outline-none text-gray-500'
+                  className={`bg-transparent outline-none ${
+                    theme === 'light' ? 'text-gray-500' : 'text-dark-input-text'
+                  } transition-colors duration-300`}
                 />
 
-                <MdMail size={20} className='text-gray-700' />
+                <MdMail
+                  size={20}
+                  className={`${
+                    theme === 'light'
+                      ? 'text-gray-700'
+                      : 'text-dark-input-icons-color'
+                  } transition-colors duration-300`}
+                />
               </div>
 
-              <div className='flex items-center justify-center bg-input-color rounded-lg px-4 py-2 gap-1'>
+              <div
+                className={`flex items-center justify-center rounded-lg px-4 py-2 gap-1 ${
+                  theme === 'light' ? 'bg-input-color' : 'bg-dark-input-color'
+                } transition-colors duration-300`}
+              >
                 <input
                   type={isPassword ? 'password' : 'text'}
                   {...register('password', {
@@ -119,20 +167,30 @@ export function RegisterPage() {
                   placeholder='Senha'
                   aria-label='Input de senha'
                   onBlur={() => setIsPassword(true)}
-                  className='bg-transparent outline-none text-gray-500'
+                  className={`bg-transparent outline-none ${
+                    theme === 'light' ? 'text-gray-500' : 'text-dark-input-text'
+                  } transition-colors duration-300`}
                 />
 
                 {isPassword ? (
                   <IoMdEye
                     onClick={handlePasswordInputType}
                     size={20}
-                    className='text-gray-700 cursor-pointer'
+                    className={`cursor-pointer ${
+                      theme === 'light'
+                        ? 'text-gray-700'
+                        : 'text-dark-input-icons-color'
+                    } transition-colors duration-300`}
                   />
                 ) : (
                   <IoMdEyeOff
                     onClick={handlePasswordInputType}
                     size={20}
-                    className='text-gray-700 cursor-pointer'
+                    className={`cursor-pointer ${
+                      theme === 'light'
+                        ? 'text-gray-700'
+                        : 'text-dark-input-icons-color'
+                    } transition-colors duration-300`}
                   />
                 )}
               </div>
@@ -145,7 +203,11 @@ export function RegisterPage() {
               </button>
             </form>
 
-            <div className='flex flex-col items-center justify-center'>
+            <div
+              className={`flex flex-col items-center justify-center ${
+                theme === 'light' ? '' : 'text-white'
+              } transition-colors duration-300`}
+            >
               <p className='font-light'>Já possui uma conta?</p>
               <p className='font-light'>
                 Entre com sua conta{' '}
