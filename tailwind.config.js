@@ -28,6 +28,14 @@ export default {
       screens: {
         xs: '400px',
       },
+      transitionProperty: {
+        'bg-transform': 'background-color, transform',
+        'color-transform': 'color, transform',
+      },
+      transitionDuration: {
+        'bg-transform': '0.3s, 0.2s',
+        'color-transform': '0.3s, 0.25s',
+      },
     },
   },
   plugins: [],
