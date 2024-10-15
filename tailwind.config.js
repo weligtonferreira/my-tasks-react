@@ -15,6 +15,8 @@ export default {
         'dark-input-color': '#474747',
         'dark-input-icons-color': '#979797',
         'dark-input-text': '#ADADAD',
+        'dark-task-color': '#575757',
+        'dark-complete-task-color': '#474747',
       },
       fontFamily: {
         sans: 'Inter',
