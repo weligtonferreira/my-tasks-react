@@ -5,6 +5,7 @@ import { ITask } from '../../dto/ITask';
 import { IUserProps } from '../../dto/IUserProps';
 import { notifySuccessPopUp } from '../../utils/notify-popups';
 import { useAuth } from '../../hooks/useAuth';
+import { useTheme } from '../../hooks/useTheme';
 import { api } from '../../services/api';
 
 interface DeleteTaskModalProps {
@@ -23,6 +24,7 @@ export function DeleteTaskModal({
   closeDeleteTaskModal,
 }: DeleteTaskModalProps) {
   const { user: authUser } = useAuth();
+  const { theme } = useTheme();
 
   const [bgColor, setBgColor] = useState('bg-black/0');
   const [scaleClass, setScaleClass] = useState('scale-0');
@@ -59,14 +61,19 @@ export function DeleteTaskModal({
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setBgColor('bg-black/20');
+      if (theme === 'light') {
+        setBgColor('bg-black/20');
+      } else {
+        setBgColor('bg-black/40');
+      }
+
       setScaleClass('scale-100');
     }, 0);
 
     return () => {
       clearInterval(timeout);
     };
-  }, []);
+  }, [theme]);
 
   return (
     <div
@@ -75,36 +82,60 @@ export function DeleteTaskModal({
       className={`w-full h-full absolute z-20 ${bgColor} transition-['background-color'] duration-500 backdrop-blur-xs`}
     >
       <div
-        className={`${scaleClass} transition-transform duration-300 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[500px] modal-shadow rounded-xl rounded-b-xl overflow-hidden`}
+        className={`${scaleClass} transition-transform duration-300 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[500px] modal-shadow rounded-xl rounded-b-xl overflow-hidden ${
+          theme === 'light' ? 'bg-white' : 'bg-[#474747]'
+        }`}
       >
-        <div className='relative flex items-center justify-center w-full py-3 bg-[#FAFAFA] border-b rounded-t-xl overflow-hidden'>
-          <p className='font-quicksand font-semibold text-center text-[#505050]'>
-            Excluir tarefa
-          </p>
+        <IoMdClose
+          size={20}
+          onClick={closeDeleteTaskModal}
+          className={`absolute z-10 top-4 right-4 cursor-pointer text-[#757575] ${
+            theme === 'light' ? 'hover:text-black' : 'hover:text-white'
+          } transition-colors`}
+        />
 
-          <IoMdClose
-            size={20}
-            onClick={closeDeleteTaskModal}
-            className='absolute right-4 cursor-pointer text-[#757575] hover:text-black transition-colors'
-          />
+        <div
+          className={`relative flex items-center justify-start w-full px-8 py-4 rounded-t-xl overflow-hidden`}
+        >
+          <p
+            className={`font-quicksand font-semibold text-center ${
+              theme === 'light' ? 'text-[#505050]' : 'text-white'
+            }`}
+          >
+            Deletar tarefa
+          </p>
         </div>
 
-        <div className='flex items-center justify-center bg-[#FAFAFA] h-full p-10'>
-          <p className='text-[#707070] text-center'>
+        <div
+          className={`flex items-center justify-start h-full px-8 pt-2 pb-6`}
+        >
+          <p
+            className={`${
+              theme === 'light' ? 'text-[#707070]' : 'text-[#EAEAEA]'
+            }`}
+          >
             Tem certeza que deseja excluir essa tarefa?
           </p>
         </div>
 
-        <div className='w-full flex justify-evenly'>
+        <div className='w-full flex justify-end px-6 py-5 gap-3'>
           <button
             onClick={() => handleDeleteTask()}
-            className='w-full text-white font-bold bg-[#E50F0F] hover:brightness-105 transition-colors p-2'
+            className={`font-semibold p-2 text-white transition-all duration-200 shadow ${
+              theme === 'light'
+                ? 'bg-[#FF0000] hover:bg-[#e41919]'
+                : 'bg-[#A72020] hover:brightness-110'
+            } rounded-md px-8 py-2`}
           >
-            Excluir
+            Deletar
           </button>
           <button
             onClick={closeDeleteTaskModal}
-            className='w-full text-[#2B2B2B] font-bold bg-[#EAEAEA] p-2 hover:brightness-95 transition-colors'
+            className={`font-semibold p-2 transition-all duration-200 shadow ${
+              theme === 'light'
+                ? 'text-[#2B2B2B] bg-[#EAEAEA] hover:brightness-95'
+                : 'text-white bg-[#535353] hover:brightness-105'
+            } rounded-md px-8 py-2`}
           >
             Cancelar
           </button>
