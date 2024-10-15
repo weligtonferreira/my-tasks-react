@@ -88,7 +88,7 @@ export function RegisterPage() {
 
             <form
               onSubmit={handleSubmit(handleCreateAnAccount, (formErrors) =>
-                handleNotifyValidationErrors(formErrors)
+                handleNotifyValidationErrors(formErrors, theme)
               )}
               className='flex flex-col items-center justify-center gap-3'
             >
