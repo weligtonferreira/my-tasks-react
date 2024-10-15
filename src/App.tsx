@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { AppProvider } from './contexts';
 import { ProtectedRoute } from './components/protected-route';
+import { ToggleColorThemeButton } from './components/toggle-color-theme-button';
 
 import { LoginPage } from './pages/login';
 import { RegisterPage } from './pages/register';
@@ -14,6 +15,7 @@ export function App() {
     <>
       <AppProvider>
         <ToastContainer />
+        <ToggleColorThemeButton />
 
         <BrowserRouter>
           <Routes>
