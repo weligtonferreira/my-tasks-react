@@ -91,7 +91,7 @@ export function LoginPage() {
 
             <form
               onSubmit={handleSubmit(handleLogin, (formErrors) => {
-                handleNotifyValidationErrors(formErrors);
+                handleNotifyValidationErrors(formErrors, theme);
               })}
               className='flex flex-col items-center justify-center gap-3'
             >
