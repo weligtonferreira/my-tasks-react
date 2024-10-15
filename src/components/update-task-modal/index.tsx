@@ -134,7 +134,7 @@ export function UpdateTaskModal({
 
         <form
           onSubmit={handleSubmit(handleUpdateTask, (formErrors) =>
-            handleNotifyValidationErrors(formErrors)
+            handleNotifyValidationErrors(formErrors, theme)
           )}
           className='w-full'
         >
