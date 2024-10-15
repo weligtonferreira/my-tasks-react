@@ -6,14 +6,15 @@ import { MdMail } from 'react-icons/md';
 import { AxiosError } from 'axios';
 import { z } from 'zod';
 
-import { api } from '../../services/api';
-import { useAuth } from '../../hooks/useAuth';
 import {
   notifyErrorPopUp,
   notifySuccessPopUp,
 } from '../../utils/notify-popups';
 import { userLoginInputSchema } from '../../schemas/userSchema';
 import { handleNotifyValidationErrors } from '../../utils/handle-notify-validation-errors';
+import { useAuth } from '../../hooks/useAuth';
+import { useTheme } from '../../hooks/useTheme';
+import { api } from '../../services/api';
 
 type UserLoginInputSchema = z.infer<typeof userLoginInputSchema>;
 
@@ -22,6 +23,7 @@ export function LoginPage() {
   const [isPassword, setIsPassword] = useState(true);
   const navigate = useNavigate();
   const { login } = useAuth();
+  const { theme } = useTheme();
 
   function handlePasswordInputType() {
     setIsPassword(!isPassword);
@@ -35,22 +37,26 @@ export function LoginPage() {
 
       login(userToken);
 
-      notifySuccessPopUp('Login realizado com sucesso!');
+      notifySuccessPopUp('Login realizado com sucesso!', theme);
 
       navigate('/');
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response?.data.statusCode === 400) {
-          notifyErrorPopUp('Email ou senha inválidos!');
+          notifyErrorPopUp('Email ou senha inválidos!', theme);
         } else {
-          notifyErrorPopUp('Erro ao fazer login do usuário!');
+          notifyErrorPopUp('Erro ao fazer login do usuário!', theme);
         }
       }
     }
   }
 
   return (
-    <div className='flex items-center justify-center h-screen w-full bg-light'>
+    <div
+      className={`flex items-center justify-center h-screen w-full ${
+        theme === 'light' ? 'bg-light' : 'bg-dark'
+      } transition-colors duration-300`}
+    >
       <div className='flex items-center justify-around h-full w-full'>
         <div className='hidden md:flex items-center justify-center py-4'>
           <img
@@ -61,13 +67,25 @@ export function LoginPage() {
           />
         </div>
 
-        <section className='flex flex-col items-center justify-center h-full bg-primary-gray px-4 space-y-12'>
-          <h1 className='font-quicksand font-semibold text-5xl'>
+        <section
+          className={`flex flex-col items-center justify-center h-full px-4 space-y-12 ${
+            theme === 'light' ? 'bg-light' : 'bg-dark'
+          } transition-colors duration-300`}
+        >
+          <h1
+            className={`${
+              theme === 'light' ? '' : 'text-white'
+            } font-quicksand font-semibold text-5xl transition-colors duration-300`}
+          >
             My<span className='text-primary-green'>Tasks</span>
           </h1>
 
           <div className='flex flex-col items-center justify-center gap-4'>
-            <h2 className='font-quicksand font-bold text-3xl text-[#8D8D8D]'>
+            <h2
+              className={`${
+                theme === 'light' ? 'text-[#8D8D8D]' : 'text-white'
+              } font-quicksand font-bold text-3xl transition-colors duration-300`}
+            >
               Login
             </h2>
 
@@ -77,7 +95,11 @@ export function LoginPage() {
               })}
               className='flex flex-col items-center justify-center gap-3'
             >
-              <div className='flex items-center justify-center bg-input-color rounded-lg px-4 py-2 gap-1'>
+              <div
+                className={`flex items-center justify-center rounded-lg px-4 py-2 gap-1 ${
+                  theme === 'light' ? 'bg-input-color' : 'bg-dark-input-color'
+                } transition-colors duration-300`}
+              >
                 <input
                   type='email'
                   {...register('email', {
@@ -86,13 +108,26 @@ export function LoginPage() {
                   autoComplete='email'
                   placeholder='Email'
                   aria-label='Input de email'
-                  className='bg-transparent outline-none text-gray-500'
+                  className={`bg-transparent outline-none ${
+                    theme === 'light' ? 'text-gray-500' : 'text-dark-input-text'
+                  } transition-colors duration-300`}
                 />
 
-                <MdMail size={20} className='text-gray-700' />
+                <MdMail
+                  size={20}
+                  className={`${
+                    theme === 'light'
+                      ? 'text-gray-700'
+                      : 'text-dark-input-icons-color'
+                  } transition-colors duration-300`}
+                />
               </div>
 
-              <div className='flex items-center justify-center bg-input-color rounded-lg px-4 py-2 gap-1'>
+              <div
+                className={`flex items-center justify-center rounded-lg px-4 py-2 gap-1 ${
+                  theme === 'light' ? 'bg-input-color' : 'bg-dark-input-color'
+                } transition-colors duration-300`}
+              >
                 <input
                   type={isPassword ? 'password' : 'text'}
                   {...register('password', {
@@ -105,20 +140,30 @@ export function LoginPage() {
                   placeholder='Senha'
                   aria-label='Input de senha'
                   onBlur={() => setIsPassword(true)}
-                  className='bg-transparent outline-none text-gray-500'
+                  className={`bg-transparent outline-none ${
+                    theme === 'light' ? 'text-gray-500' : 'text-dark-input-text'
+                  } transition-colors duration-300`}
                 />
 
                 {isPassword ? (
                   <IoMdEye
                     onClick={handlePasswordInputType}
                     size={20}
-                    className='text-gray-700 cursor-pointer'
+                    className={`${
+                      theme === 'light'
+                        ? 'text-gray-700'
+                        : 'text-dark-input-icons-color'
+                    } transition-colors duration-300 cursor-pointer`}
                   />
                 ) : (
                   <IoMdEyeOff
                     onClick={handlePasswordInputType}
                     size={20}
-                    className='text-gray-700 cursor-pointer'
+                    className={`${
+                      theme === 'light'
+                        ? 'text-gray-700'
+                        : 'text-dark-input-icons-color'
+                    } transition-colors duration-300 cursor-pointer`}
                   />
                 )}
               </div>
@@ -131,7 +176,11 @@ export function LoginPage() {
               </button>
             </form>
 
-            <div className='flex flex-col items-center justify-center'>
+            <div
+              className={`flex flex-col items-center justify-center ${
+                theme === 'light' ? '' : 'text-white'
+              } transition-colors duration-300`}
+            >
               <p className='font-light'>Não possui sua conta ainda?</p>
               <p className='font-light'>
                 Cadastre-se{' '}
