@@ -10,7 +10,7 @@ export function ToggleColorThemeButton() {
       onClick={toggleThemeColor}
       className={`fixed z-20 bottom-12 right-14 shadow ${
         theme === 'light' ? 'bg-[#ECECEC]' : 'bg-[#5B5B5B]'
-      } flex items-center justify-center gap-3 rounded-full p-2 transition-colors duration-300 cursor-pointer`}
+      } flex items-center justify-center gap-3 rounded-full p-2 hover:scale-110 hover:brightness-95 transition-bg-transform duration-bg-transform cursor-pointer`}
     >
       <MdOutlineWbSunny
         size={25}
