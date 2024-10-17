@@ -3,7 +3,10 @@ import { IoMdClose } from 'react-icons/io';
 
 import { ITask } from '../../dto/ITask';
 import { IUserProps } from '../../dto/IUserProps';
-import { notifySuccessPopUp } from '../../utils/notify-popups';
+import {
+  notifyErrorPopUp,
+  notifySuccessPopUp,
+} from '../../utils/notify-popups';
 import { useAuth } from '../../hooks/useAuth';
 import { useTheme } from '../../hooks/useTheme';
 import { api } from '../../services/api';
@@ -49,8 +52,10 @@ export function DeleteTaskModal({
 
       closeDeleteTaskModal();
 
-      notifySuccessPopUp('Tarefa excluída com sucesso!');
+      notifySuccessPopUp('Tarefa excluída com sucesso!', theme);
     } catch (error) {
+      notifyErrorPopUp('Erro ao excluir tarefa!', theme);
+
       console.log(error);
     }
   }
