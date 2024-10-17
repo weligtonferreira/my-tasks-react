@@ -58,14 +58,8 @@ export function LoginPage() {
   }
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setTranslateToRight('opacity-100 -translate-x-0');
-      setTranslateToDown('opacity-100 -translate-y-0');
-    }, 100);
-
-    return () => {
-      clearTimeout(timeout);
-    };
+    setTranslateToRight('opacity-100 -translate-x-0');
+    setTranslateToDown('opacity-100 -translate-y-0');
   }, []);
 
   return (
