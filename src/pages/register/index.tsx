@@ -211,7 +211,10 @@ export function RegisterPage() {
               <p className='font-light'>Já possui uma conta?</p>
               <p className='font-light'>
                 Entre com sua conta{' '}
-                <a href='/login' className='text-primary-green'>
+                <a
+                  href='/login'
+                  className='font-semibold text-primary-green hover:text-secundary-green transition-colors duration-200'
+                >
                   aqui
                 </a>
               </p>
