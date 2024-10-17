@@ -184,7 +184,10 @@ export function LoginPage() {
               <p className='font-light'>Não possui sua conta ainda?</p>
               <p className='font-light'>
                 Cadastre-se{' '}
-                <a href='/register' className='text-primary-green'>
+                <a
+                  href='/register'
+                  className='font-semibold text-primary-green hover:text-secundary-green transition-colors duration-200'
+                >
                   aqui
                 </a>
               </p>
