@@ -67,7 +67,7 @@ export function HomePage() {
 
   return (
     <div
-      className={`flex flex-col ${
+      className={`flex flex-col min-h-full ${
         theme === 'light' ? 'bg-light' : 'bg-dark'
       } transition-colors duration-300`}
     >
