@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
@@ -21,6 +21,12 @@ type UserLoginInputSchema = z.infer<typeof userLoginInputSchema>;
 export function LoginPage() {
   const { register, handleSubmit } = useForm<UserLoginInputSchema>();
   const [isPassword, setIsPassword] = useState(true);
+  const [translateToRight, setTranslateToRight] = useState(
+    'opacity-0 -translate-x-20'
+  );
+  const [translateToDown, setTranslateToDown] = useState(
+    'opacity-0 -translate-y-20'
+  );
   const navigate = useNavigate();
   const { login } = useAuth();
   const { theme } = useTheme();
@@ -51,6 +57,17 @@ export function LoginPage() {
     }
   }
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setTranslateToRight('opacity-100 -translate-x-0');
+      setTranslateToDown('opacity-100 -translate-y-0');
+    }, 100);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, []);
+
   return (
     <div
       className={`flex items-center justify-center h-screen w-full ${
@@ -58,7 +75,9 @@ export function LoginPage() {
       } transition-colors duration-300`}
     >
       <div className='flex items-center justify-around h-full w-full'>
-        <div className='hidden md:flex items-center justify-center py-4'>
+        <div
+          className={`${translateToRight} hidden md:flex items-center justify-center py-4 transition-bg-transform-opacity duration-bg-transform-opacity`}
+        >
           <img
             src='/complete_task.svg'
             alt='Imagem de tarefas concluídas'
@@ -68,9 +87,7 @@ export function LoginPage() {
         </div>
 
         <section
-          className={`flex flex-col items-center justify-center h-full px-4 space-y-12 ${
-            theme === 'light' ? 'bg-light' : 'bg-dark'
-          } transition-colors duration-300`}
+          className={`${translateToDown} flex flex-col items-center justify-center h-full px-4 space-y-12 transition-bg-transform-opacity duration-bg-transform-opacity`}
         >
           <h1
             className={`${
