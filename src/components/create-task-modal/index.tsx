@@ -102,7 +102,7 @@ export function CreateTaskModal({
     <div
       tabIndex={0}
       onKeyUp={(event) => handleCloseModal(event)}
-      className={`w-full h-full absolute z-20 ${bgColor} transition-['background-color'] duration-500 backdrop-blur-xs`}
+      className={`w-full h-full fixed z-20 ${bgColor} transition-['background-color'] duration-500 backdrop-blur-xs`}
     >
       <div
         className={`${scaleClass} transition-transform duration-300 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[500px] modal-shadow rounded-xl rounded-b-xl overflow-hidden ${
