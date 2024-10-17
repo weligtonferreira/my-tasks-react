@@ -31,10 +31,12 @@ export default {
       transitionProperty: {
         'bg-transform': 'background-color, transform',
         'color-transform': 'color, transform',
+        'bg-transform-opacity': 'background-color, transform, opacity',
       },
       transitionDuration: {
         'bg-transform': '0.3s, 0.2s',
         'color-transform': '0.3s, 0.25s',
+        'bg-transform-opacity': '0.3s, 1.5s, 1.5s',
       },
     },
   },
