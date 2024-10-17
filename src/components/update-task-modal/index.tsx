@@ -59,9 +59,9 @@ export function UpdateTaskModal({
 
       closeUpdateTaskModal();
 
-      notifySuccessPopUp('Tarefa atualizada com sucesso!');
+      notifySuccessPopUp('Tarefa atualizada com sucesso!', theme);
     } catch (error) {
-      notifyErrorPopUp('Erro ao atualizar tarefa!');
+      notifyErrorPopUp('Erro ao atualizar tarefa!', theme);
 
       console.error(error);
     }
