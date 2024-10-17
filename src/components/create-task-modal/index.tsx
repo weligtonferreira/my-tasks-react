@@ -56,9 +56,9 @@ export function CreateTaskModal({
 
       closeCreateTaskModal();
 
-      notifySuccessPopUp('Tarefa adicionada com sucesso!');
+      notifySuccessPopUp('Tarefa adicionada com sucesso!', theme);
     } catch (error) {
-      notifyErrorPopUp('Erro ao criar tarefa!');
+      notifyErrorPopUp('Erro ao criar tarefa!', theme);
 
       console.error(error);
     }
