@@ -179,6 +179,7 @@ export function HomePage() {
           task={task as ITask}
           index={taskIndex}
           user={user as IUserProps}
+          isDeleteTaskModalOpen={isDeleteTaskModalOpen}
           setUser={setUser}
           closeDeleteTaskModal={closeDeleteTaskModal}
         />

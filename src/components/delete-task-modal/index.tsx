@@ -12,6 +12,7 @@ interface DeleteTaskModalProps {
   task: ITask;
   user: IUserProps;
   index: number;
+  isDeleteTaskModalOpen: boolean;
   closeDeleteTaskModal: () => void;
   setUser: (user: IUserProps) => void;
 }
@@ -20,6 +21,7 @@ export function DeleteTaskModal({
   task,
   user,
   index,
+  isDeleteTaskModalOpen,
   setUser,
   closeDeleteTaskModal,
 }: DeleteTaskModalProps) {
@@ -58,6 +60,18 @@ export function DeleteTaskModal({
       closeDeleteTaskModal();
     }
   }
+
+  useEffect(() => {
+    if (isDeleteTaskModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isDeleteTaskModalOpen]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
