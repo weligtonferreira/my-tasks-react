@@ -159,6 +159,7 @@ export function HomePage() {
       {isDetailsTaskModalOpen && (
         <DetailsTaskModal
           task={task as ITask}
+          isDetailsTaskModalOpen={isDetailsTaskModalOpen}
           closeDetailsTaskModal={closeDetailsTaskModal}
         />
       )}

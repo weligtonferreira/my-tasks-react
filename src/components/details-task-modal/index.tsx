@@ -6,11 +6,13 @@ import { useTheme } from '../../hooks/useTheme';
 
 interface DetailsTaskModalProps {
   task: ITask;
+  isDetailsTaskModalOpen: boolean;
   closeDetailsTaskModal: () => void;
 }
 
 export function DetailsTaskModal({
   task,
+  isDetailsTaskModalOpen,
   closeDetailsTaskModal,
 }: DetailsTaskModalProps) {
   const [bgColor, setBgColor] = useState('bg-black/0');
@@ -22,6 +24,18 @@ export function DetailsTaskModal({
       closeDetailsTaskModal();
     }
   }
+
+  useEffect(() => {
+    if (isDetailsTaskModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isDetailsTaskModalOpen]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
