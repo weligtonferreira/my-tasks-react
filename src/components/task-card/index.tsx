@@ -76,15 +76,15 @@ export function TaskCard({
               size={15}
               strokeWidth={3}
               onClick={handleChangeTaskStatus}
-              className={`font-bold ${
+              className={`cursor-pointer shrink-0 ${
                 theme === 'light' ? 'text-[#505050]' : 'text-[#D4D4D4]'
-              } cursor-pointer transition-colors duration-300`}
+              } transition-colors duration-300`}
             />
           ) : (
             <MdOutlineCircle
               size={15}
               onClick={handleChangeTaskStatus}
-              className={`cursor-pointer ${
+              className={`cursor-pointer shrink-0 ${
                 theme === 'light' ? 'text-[#BCBCBC]' : 'text-white'
               } transition-colors duration-300`}
             />
