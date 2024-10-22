@@ -24,7 +24,7 @@ export function Header() {
         onMouseOver={() => setIsUserMenuVisible(true)}
         onMouseOut={() => setIsUserMenuVisible(false)}
         className={`relative flex flex-col items-center justify-center rounded-full p-2 ${
-          theme === 'light' ? 'bg-gray-100 hover:bg-light' : 'bg-[#515151]'
+          theme === 'light' ? 'bg-gray-100' : 'bg-[#515151]'
         } transition-bg-transform duration-bg-transform hover:rounded-xl hover:rounded-b-none hover:drop-shadow`}
       >
         <div className='flex items-center justify-center gap-1'>
@@ -58,8 +58,8 @@ export function Header() {
             className={`${
               isUserMenuVisible ? 'h-max opacity-100' : 'h-0 opacity-60'
             } absolute top-[2.5rem] w-full ${
-              theme === 'light' ? 'bg-light' : 'bg-[#515151]'
-            } p-1 rounded-b-lg overflow-hidden transition-all ease-in duration-200`}
+              theme === 'light' ? 'bg-gray-100' : 'bg-[#515151]'
+            } p-1 rounded-b-lg overflow-hidden transition-all duration-1000`}
           >
             <ul className='flex flex-col items-center justify-center w-[inherit] select-none p-1 gap-1'>
               <hr
@@ -72,9 +72,9 @@ export function Header() {
                 onClick={logout}
                 className={`text-sm text-center hover:font-semibold ${
                   theme === 'light'
-                    ? 'text-gray-600 hover:text-white bg-gray-100 hover:bg-black'
+                    ? 'text-gray-600 hover:text-white bg-gray-200 hover:bg-black'
                     : 'text-white hover:text-black bg-black hover:bg-gray-100'
-                } px-4 py-2 rounded-md w-full transition-all duration-500 cursor-pointer`}
+                } px-4 py-2 rounded-md w-full transition-all duration-300 cursor-pointer`}
               >
                 <p className='flex items-center justify-center gap-1'>
                   Sair{' '}
