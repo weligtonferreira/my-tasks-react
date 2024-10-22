@@ -21,10 +21,10 @@ type CreateUserInputData = z.infer<typeof createUserSchema>;
 export function RegisterPage() {
   const { register, handleSubmit } = useForm<CreateUserInputData>();
   const [isPassword, setIsPassword] = useState(true);
-  const [translateToRight, setTranslateToRight] = useState(
+  const [translateRight, setTranslateRight] = useState(
     'opacity-0 -translate-x-20'
   );
-  const [translateToDown, setTranslateToDown] = useState(
+  const [translateDown, setTranslateDown] = useState(
     'opacity-0 -translate-y-20'
   );
   const navigate = useNavigate();
@@ -55,8 +55,8 @@ export function RegisterPage() {
   }
 
   useEffect(() => {
-    setTranslateToRight('opacity-100 -translate-x-0');
-    setTranslateToDown('opacity-100 -translate-y-0');
+    setTranslateRight('opacity-100 -translate-x-0');
+    setTranslateDown('opacity-100 -translate-y-0');
   }, []);
 
   return (
@@ -67,7 +67,7 @@ export function RegisterPage() {
     >
       <div className='flex items-center justify-around h-full w-full'>
         <div
-          className={`${translateToRight} hidden md:flex items-center justify-center py-4 transition-bg-transform-opacity duration-bg-transform-opacity`}
+          className={`${translateRight} hidden md:flex items-center justify-center py-4 transition-bg-transform-opacity duration-bg-transform-opacity`}
         >
           <img
             src='/complete_task.svg'
@@ -78,7 +78,7 @@ export function RegisterPage() {
         </div>
 
         <section
-          className={`${translateToDown} flex flex-col items-center justify-center h-full px-4 space-y-12 transition-bg-transform-opacity duration-bg-transform-opacity`}
+          className={`${translateDown} flex flex-col items-center justify-center h-full px-4 space-y-12 transition-bg-transform-opacity duration-bg-transform-opacity`}
         >
           <h1
             className={`font-quicksand font-semibold text-5xl ${
