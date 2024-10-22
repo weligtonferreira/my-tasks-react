@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FiCheckCircle } from 'react-icons/fi';
 
 import { Header } from '../../components/header';
@@ -24,6 +24,7 @@ export function HomePage() {
   const [isDeleteTaskModalOpen, setIsDeleteTaskModalOpen] = useState(false);
   const [task, setTask] = useState<ITask>();
   const [taskIndex, setTaskIndex] = useState<number>(0);
+  const [translateUp, setTranslateUp] = useState('opacity-0 pt-20');
 
   function openCreateTaskModal() {
     setIsCreateTaskModalOpen(true);
@@ -65,6 +66,10 @@ export function HomePage() {
     setIsDeleteTaskModalOpen(false);
   }
 
+  useEffect(() => {
+    setTranslateUp('opacity-100 pt-5');
+  }, []);
+
   return (
     <div
       className={`flex flex-col min-h-full ${
@@ -73,7 +78,9 @@ export function HomePage() {
     >
       <Header />
 
-      <main className='flex flex-col items-center justify-start h-full w-full p-5'>
+      <main
+        className={`${translateUp} flex flex-col items-center justify-start h-full w-full p-5 transition-all duration-[1500ms]`}
+      >
         {user?.tasksCount ?? 0 > 0 ? (
           <div className='flex flex-col items-center justify-center w-full sm:max-w-[70vw] gap-8 p-5'>
             <div className='flex items-center justify-between w-full'>
