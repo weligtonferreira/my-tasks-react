@@ -64,9 +64,7 @@ export function DetailsTaskModal({
       >
         <div
           className={`relative flex items-center justify-center w-full py-3 rounded-t-xl overflow-hidden ${
-            theme === 'light'
-              ? 'bg-[#FAFAFA] border-b'
-              : 'bg-[#474747] border-b border-b-[#3A3A3A]'
+            theme === 'light' ? 'bg-[#F2F2F2]' : 'bg-[#474747]'
           }`}
         >
           <p
