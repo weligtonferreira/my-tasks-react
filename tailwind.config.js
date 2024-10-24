@@ -37,6 +37,7 @@ export default {
         'bg-transform': '0.3s, 0.2s',
         'color-transform': '0.3s, 0.25s',
         'bg-transform-opacity': '0.3s, 1.5s, 1.5s',
+        'bg-transform-opacity-second': '0.3s, 0.2s, 1.5s',
       },
     },
   },
