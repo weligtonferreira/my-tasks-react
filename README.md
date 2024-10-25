@@ -4,9 +4,9 @@
 
 # MyTasks 📍
 
-MyTasks é um gerenciador de tarefas simples, ele foi desenvolvido com o intuito de praticar os conhecimentos de React e demais tecnologias descritas na seção de Tecnologias.
+MyTasks is a simple task manager, it was developed with the intention of practicing knowledge of React and other technologies described in the Technologies section.
 
-## 💻 Tecnologias
+## 💻 Technologies
 
 - [React](https://react.dev/)
 - [React Router Dom](https://reactrouter.com/en/main)
@@ -16,13 +16,19 @@ MyTasks é um gerenciador de tarefas simples, ele foi desenvolvido com o intuito
 - [TailwindCSS](https://tailwindcss.com/)
 - [Zod](https://zod.dev/)
 
-## ⚙️ Instalação
+## ⚙️ Installation
 
 ```bash
 $ npm install
 ```
 
-## 🚀 Executando o app
+## 🛠️ Configure ".env" environment variable
+
+```
+VITE_API_URL=backend-url
+```
+
+## 🚀 Running the app
 
 ```bash
 # development
