@@ -6,6 +6,8 @@
 
 MyTasks is a simple task manager, it was developed with the intention of practicing knowledge of React and other technologies described in the Technologies section.
 
+Before running the project, first make sure the API is running. To do this, [click here](https://github.com/weligtonferreira/my-tasks-api) to view the MyTasks API repository.
+
 ## 💻 Technologies
 
 - [React](https://react.dev/)
