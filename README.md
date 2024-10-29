@@ -2,7 +2,7 @@
   <a href="https://react.dev/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="150" alt="React Logo" /></a>
 </p>
 
-# MyTasks 📍
+# MyTasks 📋️
 
 MyTasks is a simple task manager, it was developed with the intention of practicing knowledge of React and other technologies described in the Technologies section.
 
