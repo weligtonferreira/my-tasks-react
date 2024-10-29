@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://react.dev/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="200" alt="React Logo" /></a>
+  <a href="https://react.dev/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="150" alt="React Logo" /></a>
 </p>
 
 # MyTasks 📍
