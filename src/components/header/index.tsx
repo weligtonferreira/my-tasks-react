@@ -11,9 +11,9 @@ export function Header() {
   const { theme } = useTheme();
 
   return (
-    <header className='flex items-center justify-between px-6 sm:px-20 py-6'>
+    <header className='flex items-center justify-between px-6 sm:px-20 py-6 select-none'>
       <h1
-        className={`font-quicksand font-semibold text-3xl select-none ${
+        className={`font-quicksand font-semibold text-3xl ${
           theme === 'light' ? '' : 'text-white'
         } transition-colors duration-300 hover:animate-pulse`}
       >
