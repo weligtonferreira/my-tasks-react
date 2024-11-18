@@ -27,6 +27,15 @@ export function DetailsTaskModal({
     }
   }
 
+  function handleCloseModal() {
+    setScaleClass('scale-0');
+    setOpacityClass('opacity-0');
+
+    setTimeout(() => {
+      closeDetailsTaskModal();
+    }, 200);
+  }
+
   useEffect(() => {
     if (isDetailsTaskModalOpen) {
       document.body.style.overflow = 'hidden';
