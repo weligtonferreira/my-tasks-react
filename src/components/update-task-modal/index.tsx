@@ -12,6 +12,7 @@ import { handleNotifyValidationErrors } from '../../utils/handle-notify-validati
 import { IUserProps } from '../../dto/IUserProps';
 import { ITask } from '../../dto/ITask';
 import { useTheme } from '../../hooks/useTheme';
+import { useAuth } from '../../hooks/useAuth';
 import { api } from '../../services/api';
 
 interface UpdateTaskModalProps {
@@ -36,6 +37,7 @@ export function UpdateTaskModal({
   const { register, reset, handleSubmit } = useForm<UpdateTaskInputData>({
     defaultValues: { title: task.title, description: task.description },
   });
+  const { user: authUser } = useAuth();
   const { theme } = useTheme();
 
   const [bgColor, setBgColor] = useState('bg-black/0');
@@ -45,7 +47,9 @@ export function UpdateTaskModal({
   async function handleUpdateTask(createTaskInputData: UpdateTaskInputData) {
     try {
       await api
-        .put(`/tasks/${task?.id}`, createTaskInputData)
+        .put(`/tasks/${task?.id}`, createTaskInputData, {
+          headers: { Authorization: `Bearer ${authUser?.token}` },
+        })
         .then((res) => res.data);
 
       const updatedTasks = user.tasks;
