@@ -88,7 +88,7 @@ export function DetailsTaskModal({
 
           <IoMdClose
             size={20}
-            onClick={closeDetailsTaskModal}
+            onClick={handleCloseModal}
             className={`absolute right-4 cursor-pointer text-[#757575] ${
               theme === 'light' ? 'hover:text-black' : 'hover:text-white'
             } transition-colors`}
