@@ -28,7 +28,10 @@ export function App() {
             />
 
             <Route element={<ProtectedRoute />}>
-              <Route path='/' element={<HomePage />} />
+              <Route
+                path='/'
+                element={<HomePage component={<ToggleColorThemeButton />} />}
+              />
             </Route>
           </Routes>
         </BrowserRouter>

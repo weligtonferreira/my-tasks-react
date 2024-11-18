@@ -14,7 +14,11 @@ import { IUserProps } from '../../dto/IUserProps';
 import { useFetchUserData } from '../../hooks/useFetchUserData';
 import { useTheme } from '../../hooks/useTheme';
 
-export function HomePage() {
+interface HomePageProps {
+  component: React.ReactNode;
+}
+
+export function HomePage({ component: ToggleColorThemeButton }: HomePageProps) {
   const { user, setUser } = useFetchUserData();
   const { theme } = useTheme();
 
@@ -74,119 +78,123 @@ export function HomePage() {
   }, []);
 
   return (
-    <div
-      className={`flex flex-col min-h-full ${
-        theme === 'light' ? 'bg-light' : 'bg-dark'
-      } transition-colors duration-300`}
-    >
-      <Header />
-
-      <main
-        className={`${translateUp} flex flex-col items-center justify-start h-full w-full p-5 transition-all duration-[1500ms]`}
+    <>
+      <div
+        className={`flex flex-col min-h-full ${
+          theme === 'light' ? 'bg-light' : 'bg-dark'
+        } transition-colors duration-300`}
       >
-        {user?.tasksCount ?? 0 > 0 ? (
-          <div className='flex flex-col items-center justify-center w-full sm:max-w-[70vw] gap-8 p-5'>
-            <div className='flex items-center justify-between w-full'>
-              <div className='flex items-center gap-1'>
-                <FiCheckCircle
-                  size={25}
-                  strokeWidth={3}
-                  className={`font-bold ${
-                    theme === 'light' ? 'text-[#505050]' : 'text-white'
-                  } transition-colors duration-300`}
-                />
+        <Header />
 
-                <p
-                  className={`font-sans font-semibold text-3xl ${
-                    theme === 'light' ? 'text-[#505050]' : 'text-white'
+        <main
+          className={`${translateUp} flex flex-col items-center justify-start h-full w-full p-5 transition-all duration-[1500ms]`}
+        >
+          {user?.tasksCount ?? 0 > 0 ? (
+            <div className='flex flex-col items-center justify-center w-full sm:max-w-[70vw] gap-8 p-5'>
+              <div className='flex items-center justify-between w-full'>
+                <div className='flex items-center gap-1'>
+                  <FiCheckCircle
+                    size={25}
+                    strokeWidth={3}
+                    className={`font-bold ${
+                      theme === 'light' ? 'text-[#505050]' : 'text-white'
+                    } transition-colors duration-300`}
+                  />
+
+                  <p
+                    className={`font-sans font-semibold text-3xl ${
+                      theme === 'light' ? 'text-[#505050]' : 'text-white'
+                    } transition-colors duration-300`}
+                  >
+                    {user?.tasksCount ?? 0}{' '}
+                    {user?.tasksCount === 1 ? 'Tarefa' : 'Tarefas'}
+                  </p>
+                </div>
+
+                <AddButton openCreateTaskModal={openCreateTaskModal}>
+                  Adicionar
+                </AddButton>
+              </div>
+
+              <div className='relative flex flex-col items-center justify-center w-full gap-3 mb-16'>
+                {user?.tasks.map((task, index) => (
+                  <div key={task.id} className='relative w-full'>
+                    <TaskCard
+                      user={user}
+                      task={task}
+                      index={index}
+                      setUser={setUser}
+                      openDetailsTaskModal={openDetailsTaskModal}
+                      openUpdateTaskModal={openUpdateTaskModal}
+                      openDeleteTaskModal={openDeleteTaskModal}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className='flex flex-col items-center justify-center h-full w-full gap-12 p-5'>
+              <img
+                src='/no-tasks.svg'
+                alt='Nenhuma tarefa'
+                className='w-[230px] 2xl:w-[400px]'
+              />
+
+              <div className='flex flex-col items-center justify-center gap-5'>
+                <div
+                  className={`flex flex-col ${
+                    theme === 'light' ? '' : 'text-white'
                   } transition-colors duration-300`}
                 >
-                  {user?.tasksCount ?? 0}{' '}
-                  {user?.tasksCount === 1 ? 'Tarefa' : 'Tarefas'}
-                </p>
-              </div>
-
-              <AddButton openCreateTaskModal={openCreateTaskModal}>
-                Adicionar
-              </AddButton>
-            </div>
-
-            <div className='relative flex flex-col items-center justify-center w-full gap-3 mb-16'>
-              {user?.tasks.map((task, index) => (
-                <div key={task.id} className='relative w-full'>
-                  <TaskCard
-                    user={user}
-                    task={task}
-                    index={index}
-                    setUser={setUser}
-                    openDetailsTaskModal={openDetailsTaskModal}
-                    openUpdateTaskModal={openUpdateTaskModal}
-                    openDeleteTaskModal={openDeleteTaskModal}
-                  />
+                  <span className='font-bold text-center text-sm sm:text-base'>
+                    Ops... parece que ainda não temos nada ainda
+                  </span>
+                  <p className='text-center text-xs sm:text-sm md:text-base'>
+                    Nenhuma tarefa foi encontrada, crie a sua primeira tarefa!
+                  </p>
                 </div>
-              ))}
-            </div>
-          </div>
-        ) : (
-          <div className='flex flex-col items-center justify-center h-full w-full gap-12 p-5'>
-            <img
-              src='/no-tasks.svg'
-              alt='Nenhuma tarefa'
-              className='w-[230px] 2xl:w-[400px]'
-            />
 
-            <div className='flex flex-col items-center justify-center gap-5'>
-              <div
-                className={`flex flex-col ${
-                  theme === 'light' ? '' : 'text-white'
-                } transition-colors duration-300`}
-              >
-                <span className='font-bold text-center text-sm sm:text-base'>
-                  Ops... parece que ainda não temos nada ainda
-                </span>
-                <p className='text-center text-xs sm:text-sm md:text-base'>
-                  Nenhuma tarefa foi encontrada, crie a sua primeira tarefa!
-                </p>
+                <AddButton openCreateTaskModal={openCreateTaskModal}>
+                  Nova tarefa
+                </AddButton>
               </div>
-
-              <AddButton openCreateTaskModal={openCreateTaskModal}>
-                Nova tarefa
-              </AddButton>
             </div>
-          </div>
-        )}
-      </main>
+          )}
+        </main>
 
-      <CreateTaskModal
-        user={user as IUserProps}
-        isCreateTaskModalOpen={isCreateTaskModalOpen}
-        setUser={setUser}
-        closeCreateTaskModal={closeCreateTaskModal}
-      />
+        <CreateTaskModal
+          user={user as IUserProps}
+          isCreateTaskModalOpen={isCreateTaskModalOpen}
+          setUser={setUser}
+          closeCreateTaskModal={closeCreateTaskModal}
+        />
 
-      <DetailsTaskModal
-        task={task as ITask}
-        isDetailsTaskModalOpen={isDetailsTaskModalOpen}
-        closeDetailsTaskModal={closeDetailsTaskModal}
-      />
+        <DetailsTaskModal
+          task={task as ITask}
+          isDetailsTaskModalOpen={isDetailsTaskModalOpen}
+          closeDetailsTaskModal={closeDetailsTaskModal}
+        />
 
-      <UpdateTaskModal
-        user={user as IUserProps}
-        task={task as ITask}
-        taskIndex={taskIndex}
-        setUser={setUser}
-        isUpdateTaskModalOpen={isUpdateTaskModalOpen}
-        closeUpdateTaskModal={closeUpdateTaskModal}
-      />
+        <UpdateTaskModal
+          user={user as IUserProps}
+          task={task as ITask}
+          taskIndex={taskIndex}
+          setUser={setUser}
+          isUpdateTaskModalOpen={isUpdateTaskModalOpen}
+          closeUpdateTaskModal={closeUpdateTaskModal}
+        />
 
-      <DeleteTaskModal
-        task={task as ITask}
-        index={taskIndex}
-        user={user as IUserProps}
-        isDeleteTaskModalOpen={isDeleteTaskModalOpen}
-        setUser={setUser}
-        closeDeleteTaskModal={closeDeleteTaskModal}
-      />
-    </div>
+        <DeleteTaskModal
+          task={task as ITask}
+          index={taskIndex}
+          user={user as IUserProps}
+          isDeleteTaskModalOpen={isDeleteTaskModalOpen}
+          setUser={setUser}
+          closeDeleteTaskModal={closeDeleteTaskModal}
+        />
+      </div>
+
+      {ToggleColorThemeButton}
+    </>
   );
 }
