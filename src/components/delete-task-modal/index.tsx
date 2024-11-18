@@ -68,6 +68,15 @@ export function DeleteTaskModal({
     }
   }
 
+  function handleCloseModal() {
+    setScaleClass('scale-0');
+    setOpacityClass('opacity-0');
+
+    setTimeout(() => {
+      closeDeleteTaskModal();
+    }, 200);
+  }
+
   useEffect(() => {
     if (isDeleteTaskModalOpen) {
       document.body.style.overflow = 'hidden';
@@ -109,7 +118,7 @@ export function DeleteTaskModal({
       >
         <IoMdClose
           size={20}
-          onClick={closeDeleteTaskModal}
+          onClick={handleCloseModal}
           className={`absolute z-10 top-4 right-4 cursor-pointer text-[#757575] ${
             theme === 'light' ? 'hover:text-black' : 'hover:text-white'
           } transition-colors`}
@@ -151,7 +160,7 @@ export function DeleteTaskModal({
             Deletar
           </button>
           <button
-            onClick={closeDeleteTaskModal}
+            onClick={handleCloseModal}
             className={`font-semibold p-2 transition-all duration-200 shadow ${
               theme === 'light'
                 ? 'text-[#2B2B2B] bg-[#EAEAEA] hover:brightness-95'
