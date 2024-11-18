@@ -67,7 +67,9 @@ export function UpdateTaskModal({
     }
   }
 
-  function handleCloseModal(event: React.KeyboardEvent<HTMLDivElement>) {
+  function handleCloseModalWithEscKey(
+    event: React.KeyboardEvent<HTMLDivElement>
+  ) {
     if (event.key === 'Escape') {
       closeUpdateTaskModal();
     }
