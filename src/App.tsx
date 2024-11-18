@@ -22,7 +22,10 @@ export function App() {
               path='/login'
               element={<LoginPage component={<ToggleColorThemeButton />} />}
             />
-            <Route path='/register' element={<RegisterPage />} />
+            <Route
+              path='/register'
+              element={<RegisterPage component={<ToggleColorThemeButton />} />}
+            />
 
             <Route element={<ProtectedRoute />}>
               <Route path='/' element={<HomePage />} />
