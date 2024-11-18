@@ -60,7 +60,9 @@ export function DeleteTaskModal({
     }
   }
 
-  function handleCloseModal(event: React.KeyboardEvent<HTMLDivElement>) {
+  function handleCloseModalWithEscKey(
+    event: React.KeyboardEvent<HTMLDivElement>
+  ) {
     if (event.key === 'Escape') {
       closeDeleteTaskModal();
     }
