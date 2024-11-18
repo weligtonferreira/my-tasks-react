@@ -33,7 +33,7 @@ export function UpdateTaskModal({
   setUser,
   closeUpdateTaskModal,
 }: UpdateTaskModalProps) {
-  const { register, handleSubmit } = useForm<UpdateTaskInputData>({
+  const { register, reset, handleSubmit } = useForm<UpdateTaskInputData>({
     defaultValues: { title: task.title, description: task.description },
   });
   const { theme } = useTheme();
@@ -85,6 +85,12 @@ export function UpdateTaskModal({
       closeUpdateTaskModal();
     }, 200);
   }
+
+  useEffect(() => {
+    if (task && isUpdateTaskModalOpen) {
+      reset({ title: task.title, description: task.description });
+    }
+  }, [task, isUpdateTaskModalOpen, reset]);
 
   useEffect(() => {
     if (isUpdateTaskModalOpen) {
