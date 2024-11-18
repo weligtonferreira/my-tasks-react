@@ -75,6 +75,15 @@ export function UpdateTaskModal({
     }
   }
 
+  function handleCloseModal() {
+    setScaleClass('scale-0');
+    setOpacityClass('opacity-0');
+
+    setTimeout(() => {
+      closeUpdateTaskModal();
+    }, 200);
+  }
+
   useEffect(() => {
     if (isUpdateTaskModalOpen) {
       document.body.style.overflow = 'hidden';
@@ -116,7 +125,7 @@ export function UpdateTaskModal({
       >
         <IoMdClose
           size={20}
-          onClick={closeUpdateTaskModal}
+          onClick={handleCloseModal}
           className={`absolute z-10 top-4 right-4 cursor-pointer ${
             theme === 'light'
               ? 'text-[#757575] hover:text-black'
@@ -199,7 +208,7 @@ export function UpdateTaskModal({
             </button>
             <button
               type='button'
-              onClick={closeUpdateTaskModal}
+              onClick={handleCloseModal}
               className={`w-full rounded-md font-semibold py-3 transition-colors duration-200 ${
                 theme === 'light'
                   ? 'text-[#757575] bg-[#E5E5E5] hover:bg-[#D3D3D3] hover:text-[#444]'
