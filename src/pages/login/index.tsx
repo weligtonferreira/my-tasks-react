@@ -18,7 +18,13 @@ import { api } from '../../services/api';
 
 type UserLoginInputSchema = z.infer<typeof userLoginInputSchema>;
 
-export function LoginPage() {
+interface LoginPageProps {
+  component: React.ReactNode;
+}
+
+export function LoginPage({
+  component: ToggleColorThemeButton,
+}: LoginPageProps) {
   const { register, handleSubmit } = useForm<UserLoginInputSchema>();
   const [isPassword, setIsPassword] = useState(true);
   const [translateRight, setTranslateRight] = useState(
@@ -63,149 +69,157 @@ export function LoginPage() {
   }, []);
 
   return (
-    <div
-      className={`flex items-center justify-center h-screen w-full ${
-        theme === 'light' ? 'bg-light' : 'bg-dark'
-      } transition-colors duration-300`}
-    >
-      <div className='flex items-center justify-around h-full w-full'>
-        <div
-          className={`${translateRight} hidden md:flex items-center justify-center py-4 transition-bg-transform-opacity duration-bg-transform-opacity`}
-        >
-          <img
-            src='/complete_task.svg'
-            alt='Imagem de tarefas concluídas'
-            height={400}
-            width={400}
-          />
-        </div>
-
-        <section
-          className={`${translateDown} flex flex-col items-center justify-center h-full px-4 space-y-12 transition-bg-transform-opacity duration-bg-transform-opacity`}
-        >
-          <h1
-            className={`${
-              theme === 'light' ? '' : 'text-white'
-            } font-quicksand font-semibold text-5xl transition-colors duration-300`}
+    <>
+      <div
+        className={`flex items-center justify-center h-screen w-full ${
+          theme === 'light' ? 'bg-light' : 'bg-dark'
+        } transition-colors duration-300`}
+      >
+        <div className='flex items-center justify-around h-full w-full'>
+          <div
+            className={`${translateRight} hidden md:flex items-center justify-center py-4 transition-bg-transform-opacity duration-bg-transform-opacity`}
           >
-            My<span className='text-primary-green'>Tasks</span>
-          </h1>
-
-          <div className='flex flex-col items-center justify-center gap-4'>
-            <h2
-              className={`${
-                theme === 'light' ? 'text-[#8D8D8D]' : 'text-white'
-              } font-quicksand font-bold text-3xl transition-colors duration-300`}
-            >
-              Login
-            </h2>
-
-            <form
-              onSubmit={handleSubmit(handleLogin, (formErrors) => {
-                handleNotifyValidationErrors(formErrors, theme);
-              })}
-              className='flex flex-col items-center justify-center gap-3'
-            >
-              <div
-                className={`flex items-center justify-center rounded-lg px-4 py-2 gap-1 ${
-                  theme === 'light' ? 'bg-input-color' : 'bg-dark-input-color'
-                } transition-colors duration-300`}
-              >
-                <input
-                  type='email'
-                  {...register('email', {
-                    required: 'O campo email é obrigatório',
-                  })}
-                  autoComplete='email'
-                  placeholder='Email'
-                  aria-label='Input de email'
-                  className={`bg-transparent outline-none ${
-                    theme === 'light' ? 'text-gray-500' : 'text-dark-input-text'
-                  } transition-colors duration-300`}
-                />
-
-                <MdMail
-                  size={20}
-                  className={`${
-                    theme === 'light'
-                      ? 'text-gray-700'
-                      : 'text-dark-input-icons-color'
-                  } transition-colors duration-300`}
-                />
-              </div>
-
-              <div
-                className={`flex items-center justify-center rounded-lg px-4 py-2 gap-1 ${
-                  theme === 'light' ? 'bg-input-color' : 'bg-dark-input-color'
-                } transition-colors duration-300`}
-              >
-                <input
-                  type={isPassword ? 'password' : 'text'}
-                  {...register('password', {
-                    required: 'O campo senha é obrigatório',
-                    minLength: {
-                      value: 8,
-                      message: 'A senha deve ter ao menos oito caracteres',
-                    },
-                  })}
-                  placeholder='Senha'
-                  aria-label='Input de senha'
-                  onBlur={() => setIsPassword(true)}
-                  className={`bg-transparent outline-none ${
-                    theme === 'light' ? 'text-gray-500' : 'text-dark-input-text'
-                  } transition-colors duration-300`}
-                />
-
-                {isPassword ? (
-                  <IoMdEye
-                    onClick={handlePasswordInputType}
-                    size={20}
-                    className={`${
-                      theme === 'light'
-                        ? 'text-gray-700'
-                        : 'text-dark-input-icons-color'
-                    } transition-colors duration-300 cursor-pointer`}
-                  />
-                ) : (
-                  <IoMdEyeOff
-                    onClick={handlePasswordInputType}
-                    size={20}
-                    className={`${
-                      theme === 'light'
-                        ? 'text-gray-700'
-                        : 'text-dark-input-icons-color'
-                    } transition-colors duration-300 cursor-pointer`}
-                  />
-                )}
-              </div>
-
-              <button
-                type='submit'
-                className='w-full py-2 rounded-lg font-bold text-white bg-primary-green hover:bg-[#259629] transition-colors'
-              >
-                Entrar
-              </button>
-            </form>
-
-            <div
-              className={`flex flex-col items-center justify-center ${
-                theme === 'light' ? '' : 'text-white'
-              } transition-colors duration-300`}
-            >
-              <p className='font-light'>Não possui sua conta ainda?</p>
-              <p className='font-light'>
-                Cadastre-se{' '}
-                <a
-                  href='/register'
-                  className='font-semibold text-primary-green hover:text-secundary-green transition-colors duration-200'
-                >
-                  aqui
-                </a>
-              </p>
-            </div>
+            <img
+              src='/complete_task.svg'
+              alt='Imagem de tarefas concluídas'
+              height={400}
+              width={400}
+            />
           </div>
-        </section>
+
+          <section
+            className={`${translateDown} flex flex-col items-center justify-center h-full px-4 space-y-12 transition-bg-transform-opacity duration-bg-transform-opacity`}
+          >
+            <h1
+              className={`${
+                theme === 'light' ? '' : 'text-white'
+              } font-quicksand font-semibold text-5xl transition-colors duration-300`}
+            >
+              My<span className='text-primary-green'>Tasks</span>
+            </h1>
+
+            <div className='flex flex-col items-center justify-center gap-4'>
+              <h2
+                className={`${
+                  theme === 'light' ? 'text-[#8D8D8D]' : 'text-white'
+                } font-quicksand font-bold text-3xl transition-colors duration-300`}
+              >
+                Login
+              </h2>
+
+              <form
+                onSubmit={handleSubmit(handleLogin, (formErrors) => {
+                  handleNotifyValidationErrors(formErrors, theme);
+                })}
+                className='flex flex-col items-center justify-center gap-3'
+              >
+                <div
+                  className={`flex items-center justify-center rounded-lg px-4 py-2 gap-1 ${
+                    theme === 'light' ? 'bg-input-color' : 'bg-dark-input-color'
+                  } transition-colors duration-300`}
+                >
+                  <input
+                    type='email'
+                    {...register('email', {
+                      required: 'O campo email é obrigatório',
+                    })}
+                    autoComplete='email'
+                    placeholder='Email'
+                    aria-label='Input de email'
+                    className={`bg-transparent outline-none ${
+                      theme === 'light'
+                        ? 'text-gray-500'
+                        : 'text-dark-input-text'
+                    } transition-colors duration-300`}
+                  />
+
+                  <MdMail
+                    size={20}
+                    className={`${
+                      theme === 'light'
+                        ? 'text-gray-700'
+                        : 'text-dark-input-icons-color'
+                    } transition-colors duration-300`}
+                  />
+                </div>
+
+                <div
+                  className={`flex items-center justify-center rounded-lg px-4 py-2 gap-1 ${
+                    theme === 'light' ? 'bg-input-color' : 'bg-dark-input-color'
+                  } transition-colors duration-300`}
+                >
+                  <input
+                    type={isPassword ? 'password' : 'text'}
+                    {...register('password', {
+                      required: 'O campo senha é obrigatório',
+                      minLength: {
+                        value: 8,
+                        message: 'A senha deve ter ao menos oito caracteres',
+                      },
+                    })}
+                    placeholder='Senha'
+                    aria-label='Input de senha'
+                    onBlur={() => setIsPassword(true)}
+                    className={`bg-transparent outline-none ${
+                      theme === 'light'
+                        ? 'text-gray-500'
+                        : 'text-dark-input-text'
+                    } transition-colors duration-300`}
+                  />
+
+                  {isPassword ? (
+                    <IoMdEye
+                      onClick={handlePasswordInputType}
+                      size={20}
+                      className={`${
+                        theme === 'light'
+                          ? 'text-gray-700'
+                          : 'text-dark-input-icons-color'
+                      } transition-colors duration-300 cursor-pointer`}
+                    />
+                  ) : (
+                    <IoMdEyeOff
+                      onClick={handlePasswordInputType}
+                      size={20}
+                      className={`${
+                        theme === 'light'
+                          ? 'text-gray-700'
+                          : 'text-dark-input-icons-color'
+                      } transition-colors duration-300 cursor-pointer`}
+                    />
+                  )}
+                </div>
+
+                <button
+                  type='submit'
+                  className='w-full py-2 rounded-lg font-bold text-white bg-primary-green hover:bg-[#259629] transition-colors'
+                >
+                  Entrar
+                </button>
+              </form>
+
+              <div
+                className={`flex flex-col items-center justify-center ${
+                  theme === 'light' ? '' : 'text-white'
+                } transition-colors duration-300`}
+              >
+                <p className='font-light'>Não possui sua conta ainda?</p>
+                <p className='font-light'>
+                  Cadastre-se{' '}
+                  <a
+                    href='/register'
+                    className='font-semibold text-primary-green hover:text-secundary-green transition-colors duration-200'
+                  >
+                    aqui
+                  </a>
+                </p>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
-    </div>
+
+      {ToggleColorThemeButton}
+    </>
   );
 }
