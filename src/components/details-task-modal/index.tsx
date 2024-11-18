@@ -49,19 +49,13 @@ export function DetailsTaskModal({
   }, [isDetailsTaskModalOpen]);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      if (theme === 'light') {
-        setBgColor('bg-black/20');
-      } else {
-        setBgColor('bg-black/40');
-      }
+    if (theme === 'light') {
+      setBgColor('bg-black/20');
+    } else {
+      setBgColor('bg-black/40');
+    }
 
-      setScaleClass('scale-100');
-    }, 0);
-
-    return () => {
-      clearInterval(timeout);
-    };
+    setScaleClass('scale-100');
   }, [theme]);
 
   return (
