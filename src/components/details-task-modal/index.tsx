@@ -19,7 +19,9 @@ export function DetailsTaskModal({
   const [scaleClass, setScaleClass] = useState('scale-0');
   const { theme } = useTheme();
 
-  function handleCloseModal(event: React.KeyboardEvent<HTMLDivElement>) {
+  function handleCloseModalWithEscKey(
+    event: React.KeyboardEvent<HTMLDivElement>
+  ) {
     if (event.key === 'Escape') {
       closeDetailsTaskModal();
     }
