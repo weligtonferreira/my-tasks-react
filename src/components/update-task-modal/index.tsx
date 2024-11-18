@@ -36,9 +36,11 @@ export function UpdateTaskModal({
   const { register, handleSubmit } = useForm<UpdateTaskInputData>({
     defaultValues: { title: task.title, description: task.description },
   });
+  const { theme } = useTheme();
+
   const [bgColor, setBgColor] = useState('bg-black/0');
   const [scaleClass, setScaleClass] = useState('scale-0');
-  const { theme } = useTheme();
+  const [opacityClass, setOpacityClass] = useState('opacity-0');
 
   async function handleUpdateTask(createTaskInputData: UpdateTaskInputData) {
     try {
@@ -87,6 +89,8 @@ export function UpdateTaskModal({
   useEffect(() => {
     if (isUpdateTaskModalOpen) {
       document.body.style.overflow = 'hidden';
+      setScaleClass('scale-100');
+      setOpacityClass('opacity-100');
     } else {
       document.body.style.overflow = 'auto';
     }
@@ -109,8 +113,10 @@ export function UpdateTaskModal({
   return (
     <div
       tabIndex={0}
-      onKeyUp={(event) => handleCloseModal(event)}
-      className={`w-full h-full fixed z-20 ${bgColor} transition-['background-color'] duration-500 backdrop-blur-xs`}
+      onKeyUp={(event) => handleCloseModalWithEscKey(event)}
+      className={`${
+        isUpdateTaskModalOpen === false ? 'hidden' : ''
+      } w-full h-full fixed z-20 ${bgColor} ${opacityClass} transition-all duration-500 backdrop-blur-xs`}
     >
       <div
         className={`${scaleClass} transition-transform duration-300 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[500px] modal-shadow rounded-xl rounded-b-xl overflow-hidden ${
