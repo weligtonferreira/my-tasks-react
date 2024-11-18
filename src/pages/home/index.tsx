@@ -157,44 +157,36 @@ export function HomePage() {
         )}
       </main>
 
-      {isCreateTaskModalOpen && (
-        <CreateTaskModal
-          user={user as IUserProps}
-          isCreateTaskModalOpen={isCreateTaskModalOpen}
-          setUser={setUser}
-          closeCreateTaskModal={closeCreateTaskModal}
-        />
-      )}
+      <CreateTaskModal
+        user={user as IUserProps}
+        isCreateTaskModalOpen={isCreateTaskModalOpen}
+        setUser={setUser}
+        closeCreateTaskModal={closeCreateTaskModal}
+      />
 
-      {isDetailsTaskModalOpen && (
-        <DetailsTaskModal
-          task={task as ITask}
-          isDetailsTaskModalOpen={isDetailsTaskModalOpen}
-          closeDetailsTaskModal={closeDetailsTaskModal}
-        />
-      )}
+      <DetailsTaskModal
+        task={task as ITask}
+        isDetailsTaskModalOpen={isDetailsTaskModalOpen}
+        closeDetailsTaskModal={closeDetailsTaskModal}
+      />
 
-      {isUpdateTaskModalOpen && (
-        <UpdateTaskModal
-          user={user as IUserProps}
-          task={task as ITask}
-          taskIndex={taskIndex}
-          setUser={setUser}
-          isUpdateTaskModalOpen={isUpdateTaskModalOpen}
-          closeUpdateTaskModal={closeUpdateTaskModal}
-        />
-      )}
+      <UpdateTaskModal
+        user={user as IUserProps}
+        task={task as ITask}
+        taskIndex={taskIndex}
+        setUser={setUser}
+        isUpdateTaskModalOpen={isUpdateTaskModalOpen}
+        closeUpdateTaskModal={closeUpdateTaskModal}
+      />
 
-      {isDeleteTaskModalOpen && (
-        <DeleteTaskModal
-          task={task as ITask}
-          index={taskIndex}
-          user={user as IUserProps}
-          isDeleteTaskModalOpen={isDeleteTaskModalOpen}
-          setUser={setUser}
-          closeDeleteTaskModal={closeDeleteTaskModal}
-        />
-      )}
+      <DeleteTaskModal
+        task={task as ITask}
+        index={taskIndex}
+        user={user as IUserProps}
+        isDeleteTaskModalOpen={isDeleteTaskModalOpen}
+        setUser={setUser}
+        closeDeleteTaskModal={closeDeleteTaskModal}
+      />
     </div>
   );
 }
