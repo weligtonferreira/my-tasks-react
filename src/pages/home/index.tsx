@@ -22,7 +22,10 @@ export function HomePage() {
   const [isDetailsTaskModalOpen, setIsDetailsTaskModalOpen] = useState(false);
   const [isUpdateTaskModalOpen, setIsUpdateTaskModalOpen] = useState(false);
   const [isDeleteTaskModalOpen, setIsDeleteTaskModalOpen] = useState(false);
-  const [task, setTask] = useState<ITask>();
+  const [task, setTask] = useState<Partial<ITask>>({
+    title: '',
+    description: '',
+  });
   const [taskIndex, setTaskIndex] = useState<number>(0);
   const [translateUp, setTranslateUp] = useState('opacity-0 pt-20');
 
