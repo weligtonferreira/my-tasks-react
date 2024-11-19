@@ -29,7 +29,7 @@ export function CreateTaskModal({
   setUser,
   closeCreateTaskModal,
 }: CreateTaskModalProps) {
-  const { register, handleSubmit } = useForm<CreateTaskInputData>();
+  const { register, reset, handleSubmit } = useForm<CreateTaskInputData>();
   const { user: authUser } = useAuth();
   const { theme } = useTheme();
 
@@ -54,6 +54,8 @@ export function CreateTaskModal({
         tasksCount: user.tasksCount + 1,
       };
       setUser(updatedUser);
+
+      reset({ title: '', description: '' });
 
       closeCreateTaskModal();
 
