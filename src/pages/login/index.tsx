@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import { MdMail } from 'react-icons/md';
@@ -206,12 +206,12 @@ export function LoginPage({
                 <p className='font-light'>Não possui sua conta ainda?</p>
                 <p className='font-light'>
                   Cadastre-se{' '}
-                  <a
-                    href='/register'
+                  <Link
+                    to='/register'
                     className='font-semibold text-primary-green hover:text-secundary-green transition-colors duration-200'
                   >
                     aqui
-                  </a>
+                  </Link>
                 </p>
               </div>
             </div>
