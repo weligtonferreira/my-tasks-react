@@ -79,6 +79,8 @@ export function CreateTaskModal({
     setScaleClass('scale-0');
     setOpacityClass('opacity-0');
 
+    reset({ title: '', description: '' });
+
     setTimeout(() => {
       closeCreateTaskModal();
     }, 200);
