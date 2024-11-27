@@ -46,15 +46,15 @@ export function RegisterPage({
     try {
       await api.post('/users', createUserInputData);
 
-      notifySuccessPopUp('Cadastro realizado com sucesso!');
+      notifySuccessPopUp('Cadastro realizado com sucesso!', theme);
 
       navigate('/login');
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response?.data.statusCode === 409) {
-          notifyErrorPopUp('Usuário já cadastrado!');
+          notifyErrorPopUp('Usuário já cadastrado!', theme);
         } else {
-          notifyErrorPopUp('Erro ao cadastrar usuário!');
+          notifyErrorPopUp('Erro ao cadastrar usuário!', theme);
         }
       }
     }
